@@ -1,2 +1,2 @@
-# SuppaDesigner
-Designer UWP
+ # SuppaDesigner
+Designer UWP. Only for machos.
