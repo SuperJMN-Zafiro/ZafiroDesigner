@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="Designer.Parts.EditorControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lightweight="using:Zafiro.Controls.Lightweight"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:designer="using:Zafiro.Designer"
+    xmlns:designer1="using:Designer"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <designer1:ObjectTemplateSelector x:Key="TemplateSelector" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition  />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
+            <controls:LayoutTransformControl.Transform>
+                <RotateTransform Angle="-90" />
+            </controls:LayoutTransformControl.Transform>
+            <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
+                <lightweight:Ruler.RenderTransform>
+                    <ScaleTransform ScaleX="-1" ScaleY="1" />
+                </lightweight:Ruler.RenderTransform>
+            </lightweight:Ruler>
+        </controls:LayoutTransformControl>
+
+        <designer:DesignerSurface
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    x:Name="DesignerSurface"
+                                    ItemsSource="{Binding Graphics}"
+                                    LeftBinding="{Binding Left, Mode=TwoWay}"
+                                    TopBinding="{Binding Top, Mode=TwoWay}"
+                                    HeightBinding="{Binding Height, Mode=TwoWay}"
+                                    WidthBinding="{Binding Width}"
+                                    ItemTemplateSelector="{StaticResource TemplateSelector}"
+                                    SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+
+    </Grid>
+</UserControl>

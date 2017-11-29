@@ -1,0 +1,30 @@
+﻿<Application
+    x:Class="Designer.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Designer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    RequestedTheme="Light">
+
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.ThemeDictionaries>
+
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ThumbBackgroundPointerOver" Color="#4C009BFF" />
+                </ResourceDictionary>
+
+            </ResourceDictionary.ThemeDictionaries>
+
+
+            <local:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
+            <Style TargetType="TextBox">
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
