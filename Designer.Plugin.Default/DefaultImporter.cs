@@ -15,7 +15,10 @@ namespace Designer.Plugin.Default
         public DefaultImporter()
         {
             serializer = new ConfigurationContainer()
+                .UseAutoFormatting()
+                .UseOptimizedNamespaces()                
                 .EnableParameterizedContent()
+                .Register(ColorConverter.Default)
                 .Create();
         }
 
