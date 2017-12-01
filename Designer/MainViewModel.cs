@@ -25,6 +25,47 @@ namespace Designer
         public MainViewModel(IEnumerable<IImportPlugin> importPlugins)
         {
             this.importPlugins = importPlugins;
+
+            OpenFileCommand = ReactiveCommand.CreateFromTask(PickFileToOpen);
+           
+            NewFileCommand = ReactiveCommand.Create(() => new List<Document>() { new Document() });
+
+            var documentsObs = OpenFileCommand
+                .Where(file => file != null)
+                .SelectMany(LoadFile)
+                .Merge(NewFileCommand)
+                .ObserveOnDispatcher();
+
+            SaveFileCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var pickFileToSave = await PickFileToSave();
+                if (pickFileToSave != null)
+                {
+                    await SaveFile(pickFileToSave);
+                }
+            }, documentsObs.Any());
+            SaveFileCommand.ThrownExceptions.Subscribe(exception => { });
+
+
+            documentsWrapper = documentsObs.ToProperty(this, m => m.Documents);
+            SelectedDocumentObservable = this.WhenAnyValue(model => model.SelectedDocument)
+                .Where(document => document != null);
+
+            SelectedGraphicsObservable = this
+                .WhenAnyObservable(model => model.SelectedDocumentObservable)
+                .SelectMany(document => document.SelectedGraphicsObservable);
+
+            HasSomethingSelectedObservable = SelectedGraphicsObservable.Select(list => list.Any());
+            HasMoreThanOneSelectedItemObservable = SelectedGraphicsObservable.Select(x => x.Count > 1);
+
+            hasSelectionWrapper = HasSomethingSelectedObservable.ToProperty(this, m => m.HasSomethingSelected);
+
+            AlignCommands = new Commands(this);
+
+            isBusyWrapper = OpenFileCommand.IsExecuting.ToProperty(this, model => model.IsBusy);
+
+            IsDocumentSelectedObservable = SelectedDocumentObservable.Select(document => document != null);
+
             Tools = new List<Tool>
             {
                 new RectangleTool(this),
@@ -33,30 +74,45 @@ namespace Designer
                 new TextTool(this),
                 new ImageTool(this),
             };
+        }
 
-            PickFileCommand = ReactiveCommand.CreateFromTask(PickFile);
-            var documentsObs = PickFileCommand
-                .Where(file => file != null)
-                .SelectMany(LoadFromFile)
-                .ObserveOnDispatcher();
-            
-            documentsWrapper = documentsObs.ToProperty(this, m => m.Documents);
-            SelectedDocumentObservable = this.WhenAnyValue(model => model.SelectedDocument);
-            SelectedDocumentObservable.Subscribe(document => { });
+        private async Task SaveFile(IStorageFile file)
+        {
+            var plugin = importPlugins.FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
+            if (plugin == null)
+            {
+                throw new InvalidOperationException("No plugins to save this file type!");
+            }
 
-            SelectedGraphicsObservable = this
-                .WhenAnyObservable(model => model.SelectedDocumentObservable)
-                .SelectMany(document =>
-                    document == null ? Observable.Return(new List<Graphic>()) : document.SelectedGraphicsObservable);
+            using (var stream = await file.OpenStreamForWriteAsync())
+            {
+                await plugin.Save(stream, Documents);
+            }
+        }
 
-            HasSomethingSelectedObservable = SelectedGraphicsObservable .Select(list => list.Any());
-            HasMoreThanOneSelectedItemObservable = SelectedGraphicsObservable.Select(x => x.Count > 1);
+        public ReactiveCommand<Unit, Unit> SaveFileCommand { get; set; }
 
-            hasSelectionWrapper = HasSomethingSelectedObservable.ToProperty(this, m => m.HasSomethingSelected);
+        private async Task<IStorageFile> PickFileToSave()
+        {
+            var availableExtensions = importPlugins.Select(p => p.FileExtension).ToList();
 
-            AlignCommands = new Commands(this);
+            if (!availableExtensions.Any())
+            {
+                return null;
+            }
 
-            isBusyWrapper = PickFileCommand.IsExecuting.ToProperty(this, model => model.IsBusy);
+            var picker = new FileSavePicker
+            {
+                CommitButtonText = "Save",
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+
+            foreach (var ext in availableExtensions)
+            {
+                picker.FileTypeChoices.Add(new KeyValuePair<string, IList<string>>(ext, new List<string>() { ext }));
+            }
+
+            return await picker.PickSaveFileAsync();
         }
 
         public bool IsBusy => isBusyWrapper.Value;
@@ -64,10 +120,10 @@ namespace Designer
         public IObservable<IList<Graphic>> SelectedGraphicsObservable { get; }
         public IObservable<Document> SelectedDocumentObservable { get; }
 
-        public IObservable<bool> HasSomethingSelectedObservable  { get;}
+        public IObservable<bool> HasSomethingSelectedObservable { get; }
         public IObservable<bool> HasMoreThanOneSelectedItemObservable { get; }
 
-        public ReactiveCommand<Unit, IStorageFile> PickFileCommand { get; }
+        public ReactiveCommand<Unit, IStorageFile> OpenFileCommand { get; }
 
         public IList<Document> Documents => documentsWrapper.Value;
 
@@ -83,7 +139,10 @@ namespace Designer
 
         public bool HasSomethingSelected => hasSelectionWrapper.Value;
 
-        private async Task<IList<Document>> LoadFromFile(IStorageFile file)
+        public ReactiveCommand<Unit, List<Document>> NewFileCommand { get; }
+        public IObservable<bool> IsDocumentSelectedObservable { get; }
+
+        private async Task<IList<Document>> LoadFile(IStorageFile file)
         {
             var plugin = importPlugins.FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
             if (plugin == null)
@@ -93,11 +152,11 @@ namespace Designer
 
             using (var stream = await file.OpenStreamForReadAsync())
             {
-                return await plugin.Load(stream);                
+                return await plugin.Load(stream);
             }
         }
 
-        private async Task<IStorageFile> PickFile()
+        private async Task<IStorageFile> PickFileToOpen()
         {
             var availableExtensions = importPlugins.Select(p => p.FileExtension).ToList();
 

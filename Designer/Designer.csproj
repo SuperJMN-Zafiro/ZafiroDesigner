@@ -213,17 +213,21 @@
       <Project>{9358561e-d1e8-4370-b3eb-5cf8ba3187e3}</Project>
       <Name>Designer.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Designer.Plugin.Default\Designer.Plugin.Default.csproj">
+      <Project>{6ba4cfe9-536f-4131-b276-1d0418595b3b}</Project>
+      <Name>Designer.Plugin.Default</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Designer.Plugin\Designer.Plugin.csproj">
       <Project>{CF80DD07-CED2-4E4B-8461-24BA2174E646}</Project>
       <Name>Designer.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro.Controls\Zafiro.Controls.csproj">
+    <ProjectReference Include="..\Zafiro\Zafiro.Uwp.Controls\Zafiro.Uwp.Controls.csproj">
       <Project>{889d7132-88f9-4254-9640-1e38ed419184}</Project>
-      <Name>Zafiro.Controls</Name>
+      <Name>Zafiro.Uwp.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro.Designer\Zafiro.Designer.csproj">
-      <Project>{A8D0162A-4A08-40B0-91D5-E5290C1E8A0D}</Project>
-      <Name>Zafiro.Designer</Name>
+    <ProjectReference Include="..\Zafiro\Zafiro.Uwp.Designer\Zafiro.Uwp.Designer.csproj">
+      <Project>{a8d0162a-4a08-40b0-91d5-e5290c1e8a0d}</Project>
+      <Name>Zafiro.Uwp.Designer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

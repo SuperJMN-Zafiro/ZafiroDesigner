@@ -1,4 +1,3 @@
-using System.Drawing;
 using ReactiveUI;
 
 namespace Designer.Model

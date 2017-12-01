@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Designer.Plugin\Designer.Plugin.csproj" />
+    <ProjectReference Include="..\ExtendedXmlSerializer\src\ExtendedXmlSerializer\ExtendedXmlSerializer.csproj" />
+  </ItemGroup>
+
+</Project>

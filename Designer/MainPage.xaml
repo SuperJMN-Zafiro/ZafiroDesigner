@@ -9,12 +9,12 @@
     xmlns:converters="using:Designer.Converters"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
-    xmlns:contr="using:Zafiro.Controls"
-    xmlns:lightweight="using:Zafiro.Controls.Lightweight"
+    xmlns:contr="using:Zafiro.Uwp.Controls"
+    xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:parts="using:Designer.Parts"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:behaviors1="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
-    xmlns:designer="using:Zafiro.Designer"
+    xmlns:designer="using:Zafiro.Uwp.Designer"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel}">
 
     <Page.Resources>

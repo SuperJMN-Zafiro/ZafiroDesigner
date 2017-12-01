@@ -1,7 +1,8 @@
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Designer.Model;
-using Microsoft.Practices.Prism.Commands;
+using ReactiveUI;
 
 namespace Designer.Tools
 {
@@ -9,17 +10,17 @@ namespace Designer.Tools
     {
         protected Tool(MainViewModel designer)
         {
-            CreateCommand = new DelegateCommand(async () =>
+            CreateCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 var creationResult = await Create(CreationArea);
                 if (creationResult.IsSuccessful)
                 {
                     designer.SelectedDocument.Graphics.Add(creationResult.Graphic);
                 }
-            });
+            }, designer.IsDocumentSelectedObservable);
         }
 
-        public Rect CreationArea { get; set; } = new Rect(0, 0, 200, 100);
+        public Rect CreationArea { get; } = new Rect(0, 0, 200, 100);
 
         public ICommand CreateCommand { get; }        
 

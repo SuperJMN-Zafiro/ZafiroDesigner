@@ -9,5 +9,6 @@ namespace Designer.Plugin
     {
         public abstract string FileExtension { get; }
         public abstract Task<IList<Document>> Load(Stream stream);
+        public abstract Task Save(Stream stream, IList<Document> documents);
     }    
 }
