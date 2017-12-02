@@ -14,7 +14,7 @@
     d:DesignWidth="400" d:DataContext="{d:DesignInstance designer:MainViewModel}">
 
     <UserControl.Resources>
-        <converters:ValueConverterGroup x:Key="ToolToObjectConverter">
+        <converters:ValueConverterGroup x:Key="ToolTypeToImageConverter">
             <converters:TypeNameConverter />
             <valueConverters:StringToObjectConverter>
                 <valueConverters:StringToObjectConverter.Items>
@@ -40,7 +40,7 @@
 
                         <Button.Content>
                             <Image Width="25" Height="25"
-                                   Source="{Binding Converter={StaticResource ToolToObjectConverter}}" />
+                                   Source="{Binding Converter={StaticResource ToolTypeToImageConverter}}" />
                         </Button.Content>
                     </Button>
                 </DataTemplate>
