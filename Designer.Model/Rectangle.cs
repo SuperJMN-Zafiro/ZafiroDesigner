@@ -13,11 +13,7 @@ namespace Designer.Model
             set => this.RaiseAndSetIfChanged(ref cornerRadius, value);
         }
 
-        public Shadow Shadow { get; set; } = new Shadow()
-        {
-            Angle = 45,
-            Distance = 10,
-        };
+        public Shadow Shadow { get; set; } = new Shadow();
 
         public double Rotation
         {
