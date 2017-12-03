@@ -105,6 +105,7 @@
     <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Plugins\IPluginProvider.cs" />
     <Compile Include="MultiBinding\DependencyObjectCollection{T}.cs" />
     <Compile Include="MultiBinding\MultiBindingBehavior.cs" />
     <Compile Include="MultiBinding\MultiBindingItem.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Parts\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\PluginProvider.cs" />
     <Compile Include="Tools\CreationResult.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
     <Compile Include="Tools\ImageTool.cs" />

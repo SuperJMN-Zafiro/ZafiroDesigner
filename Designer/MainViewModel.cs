@@ -16,16 +16,15 @@ namespace Designer
 {
     public class MainViewModel : ReactiveObject
     {
-        private readonly IEnumerable<IImportPlugin> importPlugins;
+        private readonly IPluginProvider pluginProvider;
         private readonly ObservableAsPropertyHelper<IList<Document>> documentsWrapper;
         private readonly ObservableAsPropertyHelper<bool> hasSelectionWrapper;
         private Document selectedDocument;
         private readonly ObservableAsPropertyHelper<bool> isBusyWrapper;
 
-        public MainViewModel(IEnumerable<IImportPlugin> importPlugins)
+        public MainViewModel(IPluginProvider pluginProvider)
         {
-            this.importPlugins = importPlugins;
-
+            this.pluginProvider = pluginProvider;
             OpenFileCommand = ReactiveCommand.CreateFromTask(PickFileToOpen);
            
             NewFileCommand = ReactiveCommand.Create(() => new List<Document>() { new Document() });
@@ -78,7 +77,7 @@ namespace Designer
 
         private async Task SaveFile(IStorageFile file)
         {
-            var plugin = importPlugins.FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
+            var plugin = (await pluginProvider.GetPlugins()).FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
             if (plugin == null)
             {
                 throw new InvalidOperationException("No plugins to save this file type!");
@@ -94,7 +93,7 @@ namespace Designer
 
         private async Task<IStorageFile> PickFileToSave()
         {
-            var availableExtensions = importPlugins.Select(p => p.FileExtension).ToList();
+            var availableExtensions = (await pluginProvider.GetPlugins()).Select(p => p.FileExtension).ToList();
 
             if (!availableExtensions.Any())
             {
@@ -144,7 +143,7 @@ namespace Designer
 
         private async Task<IList<Document>> LoadFile(IStorageFile file)
         {
-            var plugin = importPlugins.FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
+            var plugin = (await pluginProvider.GetPlugins()).FirstOrDefault(importPlugin => file.Name.EndsWith(importPlugin.FileExtension));
             if (plugin == null)
             {
                 throw new InvalidOperationException("No plugins to load this file type!");
@@ -158,7 +157,7 @@ namespace Designer
 
         private async Task<IStorageFile> PickFileToOpen()
         {
-            var availableExtensions = importPlugins.Select(p => p.FileExtension).ToList();
+            var availableExtensions = (await pluginProvider.GetPlugins()).Select(p => p.FileExtension).ToList();
 
             if (!availableExtensions.Any())
             {
