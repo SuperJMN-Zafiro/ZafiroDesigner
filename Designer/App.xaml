@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="using:Designer.Converters"
     RequestedTheme="Light">
 
 
@@ -16,12 +17,13 @@
 
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="ThumbBackgroundPointerOver" Color="#4C009BFF" />
+                    <SolidColorBrush x:Key="ThumbBackgroundPressed" Color="#69009BFF" />
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
 
 
-            <local:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
+            <converters:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
             <Style TargetType="TextBox">
                 <Setter Property="BorderThickness" Value="1" />
             </Style>

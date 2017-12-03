@@ -7,7 +7,7 @@ namespace Designer.Model
         private string text;
         private Color background;
         private double rotation;
-
+ 
         public string Text
         {
             get => text;

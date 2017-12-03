@@ -9,7 +9,6 @@
     xmlns:converters="using:Designer.Converters"
     xmlns:objEditor="using:Zafiro.Uwp.Controls.ObjEditor"
     xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance designer:MainViewModel}">
@@ -43,14 +42,7 @@
                 <objEditor:Editor.Template>
                     <DataTemplate x:DataType="objEditor:PropertyItem">
                         <StackPanel>
-                            <controls:TextToolbar x:Name="Toolbar"
-                                                  Editor="{Binding ElementName=EditZone}"
-                                                  IsEnabled="True"
-                                                  Format="RichText"
-                                                  FontSize="10"
-                                                  UseURIChecker="True"
-                                                  Background="#4C4F4F4F" />
-                            <lightweight:RichEditBoxEx x:Name="EditZone" Text="{Binding Value, Mode=TwoWay}" />
+                            <lightweight:RichEditBoxEx Text="{Binding Value, Mode=TwoWay}" />
                         </StackPanel>
                     </DataTemplate>
                 </objEditor:Editor.Template>

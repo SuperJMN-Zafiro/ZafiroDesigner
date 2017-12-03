@@ -7,16 +7,152 @@
     xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:designer="using:Zafiro.Uwp.Designer"
-    xmlns:designer1="using:Designer"
+    xmlns:des="using:Designer"
     xmlns:model="using:Designer.Model"
+    xmlns:sel="using:Designer.TemplateSelectors"
+    xmlns:conv="using:Designer.Converters"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance model:Document}">
 
     <UserControl.Resources>
-        <designer1:ObjectTemplateSelector x:Key="TemplateSelector" />
+
+        <conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <conv:TintedColorConverter x:Key="TintedColorConverter" />
+        <conv:ByteArrayToImageConverter x:Key="ImageConverter" />
+        <conv:ThicknessConverter x:Key="ThicknessConverter" />
+        <conv:CornerRadiusConverter x:Key="CornerRadiusConverter" />
+        
+        <des:FocusConverter x:Key="FocusConverter"  />
+        <des:ChangeSignConverter x:Key="VerticalOffsetConverter" />
+        <sel:TypeNameTemplateSelector x:Key="SuperTemplateSelector">
+            <sel:TypeNameTemplateSelector.Items>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="Rectangle" x:DataType="model:Rectangle">
+                        <Grid>
+                            <Border Background="Black"
+                        Visibility="{x:Bind conv:MyConverter.DistanceToVisibility(Shadow.Distance), Mode=OneWay}"
+                        CornerRadius="{Binding CornerRadius, Converter={StaticResource CornerRadiusConverter}}">
+                                <Border.RenderTransform>
+                                    <TranslateTransform
+                            X="{x:Bind conv:MyConverter.PolarToCartesianX(Shadow.Angle, Shadow.Distance), Mode=OneWay}"
+                            Y="{x:Bind conv:MyConverter.PolarToCartesianY(Shadow.Angle, Shadow.Distance),Mode=OneWay}" />
+
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border CornerRadius="{x:Bind conv:MyConverter.DoubleToCornerRadius(CornerRadius), Mode=OneWay}"
+                        BorderBrush="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
+                        BorderThickness="{Binding StrokeWidth, Converter={StaticResource ThicknessConverter}}"
+                        Background="{x:Bind conv:MyConverter.TintColor(Background, BackgroundTint), Mode=OneWay}" />
+                        </Grid>
+
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="Ellipse" x:DataType="model:Ellipse">
+                        <Ellipse d:DataContext="{d:DesignInstance model:Ellipse}"
+                     Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
+                     Fill="{x:Bind conv:MyConverter.TintColor(Background, BackgroundTint), Mode=OneWay}"
+                     StrokeThickness="{Binding StrokeWidth}">
+
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:MultiBindingBehavior Converter="{StaticResource TintedColorConverter}"
+                                                    PropertyName="Fill">
+                                    <behaviors:MultiBindingItem Value="{Binding Background}" />
+                                    <behaviors:MultiBindingItem Value="{Binding BackgroundTint}" />
+                                </behaviors:MultiBindingBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </Ellipse>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="Image" x:DataType="model:Image">
+                        <Image Stretch="Fill" Source="{Binding Source, Converter={StaticResource ImageConverter}}" />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="TextBox" x:DataType="model:TextBox">
+                        
+                        <Grid Background="{Binding Background, Converter={StaticResource ColorToBrushConverter}}">
+                            <Grid.Resources>
+                                <lightweight:ActualSizePropertyProxy Element="{Binding ElementName=Toolbar}" x:Name="Proxy" />
+                            </Grid.Resources>
+                            <lightweight:RichEditBoxEx x:Name="Editor" BorderThickness="0" Text="{Binding Text}"
+                                                       RenderTransformOrigin="0,1">
+
+
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="GotFocus">
+                                        <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="True" />
+                                    </core:EventTriggerBehavior>
+                                    <core:EventTriggerBehavior EventName="LostFocus">
+                                        <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="False" />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+
+                            </lightweight:RichEditBoxEx>
+                            <Popup x:Name="Popup" VerticalOffset="{Binding ElementName=Proxy, Path=ActualHeightValue, Converter={StaticResource VerticalOffsetConverter}}">
+                                <controls:TextToolbar x:Name="Toolbar"
+                                                      Editor="{Binding ElementName=Editor}"
+                                                      IsEnabled="True"
+                                                      Format="RichText"
+                                                      FontSize="10"
+                                                      UseURIChecker="True"
+                                                      Background="#4C4F4F4F" />
+                            </Popup>
+
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="{x:Bind Rotation}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="TextField">
+                        <Grid d:DataContext="{d:DesignInstance model:TextField}">
+                            <Border BorderBrush="Gray" Opacity="0.5" ToolTipService.ToolTip="{Binding Name}">
+                                <Viewbox VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3">
+                                    <TextBlock Text="{Binding Name}" Foreground="Gray" />
+                                </Viewbox>
+                            </Border>
+                            <Border BorderBrush="Black" Opacity="0.6" Width="3" BorderThickness="1,1,0,1"
+                        HorizontalAlignment="Left" />
+                            <Border BorderBrush="Black" Opacity="0.6" Width="3" BorderThickness="0,1,1,1"
+                        HorizontalAlignment="Right" />
+                        </Grid>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="NumericField">
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="Line" x:DataType="Line">
+                        <Canvas>
+                            <Line 
+                    X1="{Binding X1}" Y1="{Binding Y1}"
+                    X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="2"
+                      Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}" />
+                            <designer:DeltaContentControl Canvas.Left="{Binding X1}" Canvas.Top="{Binding Y1}"  Margin="-3,-3,0,0"
+                                              Horizontal="{Binding X1, Mode=TwoWay}"
+                                              Vertical="{Binding Y1, Mode=TwoWay}">
+                                <Border Background="Red" Width="6" Height="6"></Border>
+                            </designer:DeltaContentControl>
+
+                            <designer:DeltaContentControl Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}" 
+                                              Horizontal="{Binding X2, Mode=TwoWay}"
+                                              Vertical="{Binding Y2, Mode=TwoWay}" Margin="-3,-3,0,0">
+                                <Border Background="Red" Width="6" Height="6"></Border>
+                            </designer:DeltaContentControl>
+
+
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </sel:TypeNameTemplateSelector.Items>
+        </sel:TypeNameTemplateSelector>
+
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,17 +177,30 @@
             </lightweight:Ruler>
         </controls:LayoutTransformControl>
 
-        <designer:DesignerSurface
-                                    Grid.Column="1"
-                                    Grid.Row="1"
-                                    x:Name="DesignerSurface"
-                                    ItemsSource="{Binding Graphics}"
-                                    LeftBinding="{Binding Left, Mode=TwoWay}"
-                                    TopBinding="{Binding Top, Mode=TwoWay}"
-                                    HeightBinding="{Binding Height, Mode=TwoWay}"
-                                    WidthBinding="{Binding Width}"
-                                    ItemTemplateSelector="{StaticResource TemplateSelector}"
-                                    SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-
+        <designer:DesignerSurface Grid.Column="1"
+                                  Grid.Row="1"
+                                  x:Name="DesignerSurface"
+                                  ItemsSource="{Binding Graphics}"
+                                  LeftBinding="{Binding Left, Mode=TwoWay}"
+                                  TopBinding="{Binding Top, Mode=TwoWay}"
+                                  HeightBinding="{Binding Height, Mode=TwoWay}"
+                                  WidthBinding="{Binding Width}"
+                                  ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
+                                  SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
     </Grid>
 </UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

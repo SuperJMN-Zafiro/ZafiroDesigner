@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangeSignConverter.cs" />
     <Compile Include="ColorCollection.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="FocusConverter.cs" />
     <Compile Include="Plugins\IPluginProvider.cs" />
     <Compile Include="MultiBinding\DependencyObjectCollection{T}.cs" />
     <Compile Include="MultiBinding\MultiBindingBehavior.cs" />
@@ -131,14 +133,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="ObjectTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\LineTool.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Converters\TypeNameConverter.cs" />
-    <Compile Include="WindowsColorToBrushConverter.cs" />
+    <Compile Include="TemplateSelectors\ItemTemplateSelector.cs" />
+    <Compile Include="Converters\WindowsColorToBrushConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
