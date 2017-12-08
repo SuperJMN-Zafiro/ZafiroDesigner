@@ -7,9 +7,9 @@ using ReactiveUI;
 
 namespace Designer
 {
-    public class Commands
+    public class AlignCommands
     {
-        public Commands(MainViewModel mainViewModel)
+        public AlignCommands(MainViewModel mainViewModel)
         {
             AlignToTopCommand = ReactiveCommand
                 .Create(() => AlignToTop(mainViewModel.SelectedDocument.SelectedGraphics),

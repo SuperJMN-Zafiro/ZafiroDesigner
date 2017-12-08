@@ -18,11 +18,17 @@
             <MenuFlyoutItem Text="Open" Command="{Binding OpenFileCommand}" />
             <MenuFlyoutItem Text="Save" Command="{Binding SaveFileCommand}" />
         </controls:MenuItem>
-        <controls:MenuItem Header="Transform">
-            <MenuFlyoutItem Text="Align to left" Command="{Binding AlignCommands.AlignToLeftCommand}" />
-            <MenuFlyoutItem Text="Align to right" Command="{Binding AlignCommands.AlignToRightCommand}" />
-            <MenuFlyoutItem Text="Align to top" Command="{Binding AlignCommands.AlignToTopCommand}" />
-            <MenuFlyoutItem Text="Align to bottom" Command="{Binding AlignCommands.AlignToBottomCommand}" />
+        <controls:MenuItem Header="Object">
+            <MenuFlyoutSubItem Text="Alignment">
+                <MenuFlyoutItem Text="Align to left" Command="{Binding AlignCommands.AlignToLeftCommand}" />
+                <MenuFlyoutItem Text="Align to right" Command="{Binding AlignCommands.AlignToRightCommand}" />
+                <MenuFlyoutItem Text="Align to top" Command="{Binding AlignCommands.AlignToTopCommand}" />
+                <MenuFlyoutItem Text="Align to bottom" Command="{Binding AlignCommands.AlignToBottomCommand}" />
+            </MenuFlyoutSubItem>
+            <MenuFlyoutSubItem Text="Z-order">
+                <MenuFlyoutItem Text="Send to front" Command="{Binding ZOrderCommands.SendToFrontCommand}" />
+                <MenuFlyoutItem Text="Send to back" Command="{Binding ZOrderCommands.SendToBackCommand}" />                
+            </MenuFlyoutSubItem>
         </controls:MenuItem>
     </controls:Menu>
 </UserControl>

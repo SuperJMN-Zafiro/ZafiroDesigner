@@ -42,7 +42,7 @@
                 <objEditor:Editor.Template>
                     <DataTemplate x:DataType="objEditor:PropertyItem">
                         <StackPanel>
-                            <lightweight:RichEditBoxEx Text="{Binding Value, Mode=TwoWay}" />
+                            <TextBox Text="{Binding Value, Mode=TwoWay}" />
                         </StackPanel>
                     </DataTemplate>
                 </objEditor:Editor.Template>

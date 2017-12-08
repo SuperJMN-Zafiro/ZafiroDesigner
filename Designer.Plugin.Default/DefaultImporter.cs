@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Designer.Model;
@@ -31,6 +32,20 @@ namespace Designer.Plugin.Default
 
         public override Task Save(Stream stream, IList<Document> documents)
         {
+            var textBox = new TextBox()
+            {
+                Text =
+                    "{\\rtf1\\fbidis\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3082{\\fonttbl{\\f0\\fnil Segoe UI;}}\r\n{\\colortbl ;\\red0\\green0\\blue0;}\r\n{\\*\\generator Riched20 10.0.16299}\\viewkind4\\uc1 \r\n\\pard\\tx720\\cf1\\f0\\fs23 Sample Text\\par\r\n}"
+            };
+            var docs = new List<Document>()
+            {
+                new Document() 
+                {
+                    Graphics = { textBox }
+                }
+            };
+
+
             serializer.Serialize(stream, documents);
             return Task.CompletedTask;
         }

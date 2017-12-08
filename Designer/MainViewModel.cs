@@ -43,6 +43,7 @@ namespace Designer
                     await SaveFile(pickFileToSave);
                 }
             }, documentsObs.Any());
+
             SaveFileCommand.ThrownExceptions.Subscribe(exception => { });
 
 
@@ -59,11 +60,15 @@ namespace Designer
 
             hasSelectionWrapper = HasSomethingSelectedObservable.ToProperty(this, m => m.HasSomethingSelected);
 
-            AlignCommands = new Commands(this);
+            
 
-            isBusyWrapper = OpenFileCommand.IsExecuting.ToProperty(this, model => model.IsBusy);
+            isBusyWrapper = OpenFileCommand.IsExecuting.Merge(SaveFileCommand.IsExecuting).ToProperty(this, model => model.IsBusy);
 
             IsDocumentSelectedObservable = SelectedDocumentObservable.Select(document => document != null);
+
+            AlignCommands = new AlignCommands(this);
+            ZOrderCommands = new ZOrderCommands(this);
+
 
             Tools = new List<Tool>
             {
@@ -74,6 +79,8 @@ namespace Designer
                 new ImageTool(this),
             };
         }
+
+        public ZOrderCommands ZOrderCommands { get; }
 
         private async Task SaveFile(IStorageFile file)
         {
@@ -86,6 +93,7 @@ namespace Designer
             using (var stream = await file.OpenStreamForWriteAsync())
             {
                 await plugin.Save(stream, Documents);
+                await stream.FlushAsync();
             }
         }
 
@@ -134,7 +142,7 @@ namespace Designer
             set => this.RaiseAndSetIfChanged(ref selectedDocument, value);
         }
 
-        public Commands AlignCommands { get; }
+        public AlignCommands AlignCommands { get; }
 
         public bool HasSomethingSelected => hasSelectionWrapper.Value;
 

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
+    xmlns:lw="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:designer="using:Zafiro.Uwp.Designer"
     xmlns:des="using:Designer"
@@ -75,12 +75,10 @@
                         
                         <Grid Background="{Binding Background, Converter={StaticResource ColorToBrushConverter}}">
                             <Grid.Resources>
-                                <lightweight:ActualSizePropertyProxy Element="{Binding ElementName=Toolbar}" x:Name="Proxy" />
+                                <lw:ActualSizePropertyProxy Element="{Binding ElementName=Toolbar}" x:Name="Proxy" />
                             </Grid.Resources>
-                            <lightweight:RichEditBoxEx x:Name="Editor" BorderThickness="0" Text="{Binding Text}"
+                            <lw:RTE x:Name="Editor" AcceptsReturn="True" BorderThickness="0" Text="{Binding Text, Mode=TwoWay}"
                                                        RenderTransformOrigin="0,1">
-
-
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="GotFocus">
                                         <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="True" />
@@ -89,8 +87,7 @@
                                         <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="False" />
                                     </core:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
-
-                            </lightweight:RichEditBoxEx>
+                            </lw:RTE>
                             <Popup x:Name="Popup" VerticalOffset="{Binding ElementName=Proxy, Path=ActualHeightValue, Converter={StaticResource VerticalOffsetConverter}}">
                                 <controls:TextToolbar x:Name="Toolbar"
                                                       Editor="{Binding ElementName=Editor}"
@@ -164,17 +161,17 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
         <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
             <controls:LayoutTransformControl.Transform>
                 <RotateTransform Angle="-90" />
             </controls:LayoutTransformControl.Transform>
-            <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
-                <lightweight:Ruler.RenderTransform>
+            <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
+                <lw:Ruler.RenderTransform>
                     <ScaleTransform ScaleX="-1" ScaleY="1" />
-                </lightweight:Ruler.RenderTransform>
-            </lightweight:Ruler>
+                </lw:Ruler.RenderTransform>
+            </lw:Ruler>
         </controls:LayoutTransformControl>
 
         <designer:DesignerSurface Grid.Column="1"
@@ -189,18 +186,3 @@
                                   SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
     </Grid>
 </UserControl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

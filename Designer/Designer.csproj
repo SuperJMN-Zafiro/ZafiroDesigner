@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="ChangeSignConverter.cs" />
     <Compile Include="ColorCollection.cs" />
-    <Compile Include="Commands.cs" />
+    <Compile Include="AlignCommands.cs" />
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\CornerRadiusConverter.cs" />
@@ -141,6 +141,7 @@
     <Compile Include="Converters\TypeNameConverter.cs" />
     <Compile Include="TemplateSelectors\ItemTemplateSelector.cs" />
     <Compile Include="Converters\WindowsColorToBrushConverter.cs" />
+    <Compile Include="ZOrderCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
