@@ -181,7 +181,7 @@
                                   LeftBinding="{Binding Left, Mode=TwoWay}"
                                   TopBinding="{Binding Top, Mode=TwoWay}"
                                   HeightBinding="{Binding Height, Mode=TwoWay}"
-                                  WidthBinding="{Binding Width}"
+                                  WidthBinding="{Binding Width, Mode=TwoWay}"
                                   ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
                                   SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
     </Grid>
