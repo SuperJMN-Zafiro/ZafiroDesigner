@@ -20,7 +20,7 @@ namespace Designer.Plugin.Default
                 .UseAutoFormatting()
                 .UseOptimizedNamespaces()                
                 .EnableParameterizedContent()
-                .Type<TextBox>().Member(x => x.Text).Verbatim()
+                .Type<TextBox>().Member(x => x.Text).Verbatim().WithValidCharacters()
                 .Register(ColorConverter.Default)
                 .Create();
         }
