@@ -3,4 +3,4 @@
 	url = https://github.com/SuperJMN/Zafiro.git
 [submodule "ExtendedXmlSerializer"]
 	path = ExtendedXmlSerializer
-	url = https://github.com/SuperJMN/ExtendedXmlSerializer.git
+url=https://github.com/wojtpl2/ExtendedXmlSerializer.git
