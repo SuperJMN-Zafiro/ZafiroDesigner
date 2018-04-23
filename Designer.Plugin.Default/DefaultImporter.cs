@@ -25,7 +25,7 @@ namespace Designer.Plugin.Default
                 .Create();
         }
 
-        public override string FileExtension => ".sdjmn";
+        public override string FileExtension => ".suppa";
         public override Task<IList<Document>> Load(Stream stream)
         {
             var deserialize = serializer.Deserialize<IList<Document>>(stream);
