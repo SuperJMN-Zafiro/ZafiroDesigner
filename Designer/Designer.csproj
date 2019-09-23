@@ -11,8 +11,8 @@
     <AssemblyName>Designer</AssemblyName>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -196,19 +196,19 @@
       <Version>2.1.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.6</Version>
+      <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>2.1.1</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>8.0.0-alpha0113</Version>
+      <Version>10.3.1</Version>
     </PackageReference>
     <PackageReference Include="ValueConverters">
-      <Version>1.0.7-pre3</Version>
+      <Version>2.0.19091.2</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
-      <Version>1.21.0</Version>
+      <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +221,7 @@
       <Name>Designer.Plugin.Default</Name>
     </ProjectReference>
     <ProjectReference Include="..\Designer.Plugin\Designer.Plugin.csproj">
-      <Project>{CF80DD07-CED2-4E4B-8461-24BA2174E646}</Project>
+      <Project>{cf80dd07-ced2-4e4b-8461-24ba2174e646}</Project>
       <Name>Designer.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zafiro\Zafiro.Uwp.Controls\Zafiro.Uwp.Controls.csproj">

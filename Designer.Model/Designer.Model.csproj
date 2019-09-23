@@ -8,6 +8,6 @@
     <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0113" />
+    <PackageReference Include="ReactiveUI" Version="10.3.1" />
   </ItemGroup>
 </Project>
