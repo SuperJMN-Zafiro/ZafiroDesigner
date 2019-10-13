@@ -41,7 +41,7 @@ namespace Designer
                 {
                     await SaveFile(pickFileToSave);
                 }
-            }, CreateFromExistingCommand.Any());
+            }, Objects.Any());
 
             IsBusy = CreateFromExistingCommand.IsExecuting.Merge(SaveFileCommand.IsExecuting);
 

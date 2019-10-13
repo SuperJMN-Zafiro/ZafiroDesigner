@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using Zafiro.Core;
 
 namespace Designer.Model
 {
@@ -8,6 +9,7 @@ namespace Designer.Model
         private Color background;
         private double rotation;
 
+        [Hidden]
         public string Text
         {
             get => text;

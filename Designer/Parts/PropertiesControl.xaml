@@ -9,6 +9,7 @@
     xmlns:converters="using:Designer.Converters"
     xmlns:objEditor="using:Zafiro.Uwp.Controls.ObjEditor"
     xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance designer:MainViewModel}">
@@ -50,6 +51,73 @@
                     <objEditor:EditorKey TargetTypeString="System.String, mscorlib" PropertyName="Text" />
                 </objEditor:Editor.Key>
             </objEditor:Editor>
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <Slider Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="CornerRadius" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
+
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <Slider Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="Distance" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
+
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <Slider Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="StrokeWidth" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
+
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <Slider Minimum="0" Maximum="1" StepFrequency="0.1" LargeChange="0.2" TickFrequency="0.1" Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="BackgroundTint" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
+
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <controls:RadialGauge MaxAngle="360" Maximum="360" IsInteractive="True" Value="{Binding Value, Mode=TwoWay}"
+                                              Minimum="0"
+                                              StepSize="5"
+                                              TickSpacing="22"
+                                              ScaleWidth="12"
+                                              MinAngle="0"
+                                              Unit="units"
+                                              NeedleWidth="1"
+                                              NeedleLength="52" 
+                                              TickLength="6"
+                                              TickWidth="0"
+                                              ScalePadding="48"
+                                              ScaleTickWidth="2" MaxHeight="120"/>
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="Angle" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
+
         </objEditor:ObjectEditor.Editors>
     </objEditor:ObjectEditor>
 </UserControl>

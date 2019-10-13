@@ -8,6 +8,7 @@ namespace Designer.Model
         private double top;
         private double width;
         private double height;
+        private double angle;
 
         public double Left
         {
@@ -31,6 +32,12 @@ namespace Designer.Model
         {
             get => height;
             set => this.RaiseAndSetIfChanged(ref height, value);
-        }        
+        }
+
+        public double Angle
+        {
+            get => angle;
+            set => this.RaiseAndSetIfChanged(ref angle, value);
+        }
     }
 }

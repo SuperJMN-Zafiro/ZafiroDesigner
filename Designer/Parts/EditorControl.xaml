@@ -26,7 +26,6 @@
         <conv:ThicknessConverter x:Key="ThicknessConverter" />
         <conv:CornerRadiusConverter x:Key="CornerRadiusConverter" />
         
-        <des:FocusConverter x:Key="FocusConverter"  />
         <des:ChangeSignConverter x:Key="VerticalOffsetConverter" />
         <sel:TypeNameTemplateSelector x:Key="SuperTemplateSelector">
             <sel:TypeNameTemplateSelector.Items>
@@ -182,6 +181,7 @@
                                   TopBinding="{Binding Top, Mode=TwoWay}"
                                   HeightBinding="{Binding Height, Mode=TwoWay}"
                                   WidthBinding="{Binding Width, Mode=TwoWay}"
+                                  AngleBinding="{Binding Angle, Mode=OneWay}"
                                   ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
                                   SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
     </Grid>
