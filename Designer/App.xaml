@@ -7,6 +7,7 @@
     mc:Ignorable="d"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:converters="using:Designer.Converters"
+    xmlns:convs="using:ValueConverters"
     RequestedTheme="Light">
 
 
@@ -27,6 +28,13 @@
             <Style TargetType="TextBox">
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
+            <local:Composition x:Key="Composition" />
+
+            <converters:ValueConverterGroup x:Key="NullToVisibilityConverter" >
+                <convs:NullToBoolConverter IsInverted="True"></convs:NullToBoolConverter>
+                <convs:BoolToVisibilityConverter></convs:BoolToVisibilityConverter>
+            </converters:ValueConverterGroup>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

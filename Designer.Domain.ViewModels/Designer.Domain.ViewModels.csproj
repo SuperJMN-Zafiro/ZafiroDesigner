@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="10.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj" />
+    <ProjectReference Include="..\Zafiro\Zafiro.Core\Zafiro.Core.csproj" />
+  </ItemGroup>
+
+</Project>

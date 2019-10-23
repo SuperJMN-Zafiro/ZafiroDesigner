@@ -1,7 +1,8 @@
 using System;
 using Windows.UI.Xaml.Media;
-using Designer.Model;
 using Windows.UI.Xaml;
+using Designer.Core;
+using Designer.Domain.Models;
 
 namespace Designer.Converters
 {

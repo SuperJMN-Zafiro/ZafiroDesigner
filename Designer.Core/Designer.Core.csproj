@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="ExtendedXmlSerializer" Version="2.1.24" />
+    <PackageReference Include="Grace" Version="7.1.0" />
+    <PackageReference Include="ReactiveUI" Version="10.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj" />
+    <ProjectReference Include="..\Designer.Domain.ViewModels\Designer.Domain.ViewModels.csproj" />
+    <ProjectReference Include="..\Zafiro\Zafiro.Core\Zafiro.Core.csproj" />
+  </ItemGroup>
+</Project>

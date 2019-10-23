@@ -7,30 +7,31 @@
     xmlns:lw="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:designer="using:Zafiro.Uwp.Designer"
-    xmlns:des="using:Designer"
-    xmlns:model="using:Designer.Model"
     xmlns:sel="using:Designer.TemplateSelectors"
     xmlns:conv="using:Designer.Converters"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:core="using:Designer.Core"
+    xmlns:designer1="using:Designer"
+    xmlns:items="using:Designer.Domain.ViewModels"
+    xmlns:converters="using:Zafiro.Uwp.Controls.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance model:Document}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
 
     <UserControl.Resources>
-
         <conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
         <conv:TintedColorConverter x:Key="TintedColorConverter" />
-        <conv:ByteArrayToImageConverter x:Key="ImageConverter" />
+        <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
         <conv:ThicknessConverter x:Key="ThicknessConverter" />
         <conv:CornerRadiusConverter x:Key="CornerRadiusConverter" />
-        
-        <des:ChangeSignConverter x:Key="VerticalOffsetConverter" />
+        <designer1:ChangeSignConverter x:Key="VerticalOffsetConverter" />
+
         <sel:TypeNameTemplateSelector x:Key="SuperTemplateSelector">
             <sel:TypeNameTemplateSelector.Items>
                 <ResourceDictionary>
-                    <DataTemplate x:Key="Rectangle" x:DataType="model:Rectangle">
+                    <DataTemplate x:Key="Rectangle" x:DataType="items:Rectangle">
                         <Grid>
                             <Border Background="Black"
                         Visibility="{x:Bind conv:MyConverter.DistanceToVisibility(Shadow.Distance), Mode=OneWay}"
@@ -50,8 +51,8 @@
 
                     </DataTemplate>
 
-                    <DataTemplate x:Key="Ellipse" x:DataType="model:Ellipse">
-                        <Ellipse d:DataContext="{d:DesignInstance model:Ellipse}"
+                    <DataTemplate x:Key="Ellipse" x:DataType="items:Ellipse">
+                        <Ellipse d:DataContext="{d:DesignInstance items:Ellipse}"
                      Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
                      Fill="{x:Bind conv:MyConverter.TintColor(Background, BackgroundTint), Mode=OneWay}"
                      StrokeThickness="{Binding StrokeWidth}">
@@ -66,25 +67,24 @@
                         </Ellipse>
                     </DataTemplate>
 
-                    <DataTemplate x:Key="Image" x:DataType="model:Image">
+                    <DataTemplate x:Key="Image" x:DataType="items:Image">
                         <Image Stretch="Fill" Source="{Binding Source, Converter={StaticResource ImageConverter}}" />
                     </DataTemplate>
 
-                    <DataTemplate x:Key="TextBox" x:DataType="model:TextBox">
-                        
+                    <DataTemplate x:Key="TextBox" x:DataType="items:TextBox">
+
                         <Grid Background="{Binding Background, Converter={StaticResource ColorToBrushConverter}}">
                             <Grid.Resources>
                                 <lw:ActualSizePropertyProxy Element="{Binding ElementName=Toolbar}" x:Name="Proxy" />
                             </Grid.Resources>
-                            <lw:RTE x:Name="Editor" AcceptsReturn="True" BorderThickness="0" Text="{Binding Text, Mode=TwoWay}"
-                                                       RenderTransformOrigin="0,1">
+                            <lw:RTE AcceptsReturn="True" Padding="0" BorderThickness="0" Text="{Binding Text, Mode=TwoWay}">
                                 <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="GotFocus">
-                                        <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="True" />
-                                    </core:EventTriggerBehavior>
-                                    <core:EventTriggerBehavior EventName="LostFocus">
-                                        <core:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="False" />
-                                    </core:EventTriggerBehavior>
+                                    <ic:EventTriggerBehavior EventName="GotFocus">
+                                        <ic:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="True" />
+                                    </ic:EventTriggerBehavior>
+                                    <ic:EventTriggerBehavior EventName="LostFocus">
+                                        <ic:ChangePropertyAction TargetObject="{Binding ElementName=Popup}" PropertyName="IsOpen" Value="False" />
+                                    </ic:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
                             </lw:RTE>
                             <Popup x:Name="Popup" VerticalOffset="{Binding ElementName=Proxy, Path=ActualHeightValue, Converter={StaticResource VerticalOffsetConverter}}">
@@ -96,16 +96,12 @@
                                                       UseURIChecker="True"
                                                       Background="#4C4F4F4F" />
                             </Popup>
-
-                            <Grid.RenderTransform>
-                                <RotateTransform Angle="{x:Bind Rotation}" />
-                            </Grid.RenderTransform>
                         </Grid>
 
                     </DataTemplate>
 
                     <DataTemplate x:Key="TextField">
-                        <Grid d:DataContext="{d:DesignInstance model:TextField}">
+                        <Grid d:DataContext="{d:DesignInstance items:TextField}">
                             <Border BorderBrush="Gray" Opacity="0.5" ToolTipService.ToolTip="{Binding Name}">
                                 <Viewbox VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3">
                                     <TextBlock Text="{Binding Name}" Foreground="Gray" />
@@ -119,7 +115,17 @@
                     </DataTemplate>
 
                     <DataTemplate x:Key="NumericField">
-                        <TextBlock Text="{Binding Name}" />
+                        <Grid d:DataContext="{d:DesignInstance items:TextField}">
+                            <Border BorderBrush="Gray" Opacity="0.5" ToolTipService.ToolTip="{Binding Name}">
+                                <Viewbox VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3">
+                                    <TextBlock Text="{Binding Name}" Foreground="Gray" />
+                                </Viewbox>
+                            </Border>
+                            <Border BorderBrush="Black" Opacity="0.6" Width="3" BorderThickness="1,1,0,1"
+                                    HorizontalAlignment="Left" />
+                            <Border BorderBrush="Black" Opacity="0.6" Width="3" BorderThickness="0,1,1,1"
+                                    HorizontalAlignment="Right" />
+                        </Grid>
                     </DataTemplate>
 
                     <DataTemplate x:Key="Line" x:DataType="Line">
@@ -173,6 +179,7 @@
             </lw:Ruler>
         </controls:LayoutTransformControl>
 
+        <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
         <designer:DesignerSurface Grid.Column="1"
                                   Grid.Row="1"
                                   x:Name="DesignerSurface"
@@ -184,5 +191,6 @@
                                   AngleBinding="{Binding Angle, Mode=OneWay}"
                                   ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
                                   SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
+        <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
     </Grid>
 </UserControl>

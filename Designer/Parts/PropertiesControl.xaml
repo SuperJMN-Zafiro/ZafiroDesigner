@@ -5,14 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls1="using:Coding4Fun.Toolkit.Controls"
-    xmlns:designer="using:Designer"
     xmlns:converters="using:Designer.Converters"
     xmlns:objEditor="using:Zafiro.Uwp.Controls.ObjEditor"
-    xmlns:lightweight="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:items="using:Designer.Domain.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance designer:MainViewModel}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Project}">
 
     <UserControl.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
