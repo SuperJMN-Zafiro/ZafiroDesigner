@@ -23,7 +23,6 @@
     <UserControl.Resources>
         <conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
         <conv:TintedColorConverter x:Key="TintedColorConverter" />
-        <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
         <conv:ThicknessConverter x:Key="ThicknessConverter" />
         <conv:CornerRadiusConverter x:Key="CornerRadiusConverter" />
         <designer1:ChangeSignConverter x:Key="VerticalOffsetConverter" />

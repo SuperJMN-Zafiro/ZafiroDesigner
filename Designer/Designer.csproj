@@ -105,10 +105,13 @@
     <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="FocusConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />
     <Compile Include="Parts\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ExtensionsProvider.cs" />
+    <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
+      <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parts\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -206,6 +209,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Parts\ImportExtensionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Parts\MenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,6 +278,7 @@
       <Name>Zafiro.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

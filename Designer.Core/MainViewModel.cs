@@ -14,6 +14,7 @@ namespace Designer.Core
         private readonly ObservableAsPropertyHelper<bool> isBusy;
         private readonly ObservableAsPropertyHelper<Project> project;
         private readonly IProjectStore projectStore;
+        private bool isImportVisible;
 
         public MainViewModel(IFilePicker filePicker, IViewModelFactory viewModelFactory,
             IProjectStore projectStore)
@@ -37,6 +38,16 @@ namespace Designer.Core
 
             isBusy = Load.IsExecuting.Merge(Save.IsExecuting).ToProperty(this, x => x.IsBusy);
             New.Execute().Subscribe();
+
+            ShowImport = ReactiveCommand.Create(() => IsImportVisible = true);
+        }
+
+        public ReactiveCommand<Unit, bool> ShowImport { get; set; }
+
+        public bool IsImportVisible
+        {
+            get => isImportVisible;
+            set => this.RaiseAndSetIfChanged(ref isImportVisible, value);
         }
 
         public bool IsBusy => isBusy.Value;
@@ -49,6 +60,7 @@ namespace Designer.Core
 
         public ReactiveCommand<Unit, Project> Load { get; }
 
+        
         private IObservable<Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {
             return filePicker.Pick("Load", loadExtensions)

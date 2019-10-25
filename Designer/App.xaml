@@ -6,8 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:converters="using:Designer.Converters"
+    xmlns:vconvs="using:Designer.Converters"
     xmlns:convs="using:ValueConverters"
+    xmlns:zconvs="using:Zafiro.Uwp.Controls.Converters"
     RequestedTheme="Light">
 
 
@@ -24,17 +25,20 @@
             </ResourceDictionary.ThemeDictionaries>
 
 
-            <converters:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
+            <vconvs:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
             <Style TargetType="TextBox">
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
-            <local:Composition x:Key="Composition" />
 
-            <converters:ValueConverterGroup x:Key="NullToVisibilityConverter" >
+            <zconvs:ByteArrayToImageConverter x:Key="ImageConverter" />
+
+            <vconvs:ValueConverterGroup x:Key="NullToVisibilityConverter" >
                 <convs:NullToBoolConverter IsInverted="True"></convs:NullToBoolConverter>
                 <convs:BoolToVisibilityConverter></convs:BoolToVisibilityConverter>
-            </converters:ValueConverterGroup>
-            
+            </vconvs:ValueConverterGroup>
+
+            <local:Composition x:Key="Composition" />
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

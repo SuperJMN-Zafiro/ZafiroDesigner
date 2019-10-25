@@ -3,6 +3,7 @@ using Designer.Core;
 using Designer.Core.Persistence;
 using Designer.Core.Tools;
 using Designer.Domain.ViewModels;
+using Designer.Extensions;
 using Grace.DependencyInjection;
 using Zafiro.Core;
 using Zafiro.Uwp.Controls;
@@ -30,9 +31,13 @@ namespace Designer
                 registrationBlock.Export<DesignContext>().As<IDesignContext>().Lifestyle.Singleton();
                 registrationBlock.Export<ViewModelFactory>().As<IViewModelFactory>().Lifestyle.Singleton();
                 registrationBlock.Export<ProjectStore>().As<IProjectStore>().Lifestyle.Singleton();
+                registrationBlock.ExportFactory(() => new ExtensionsProvider("superjmn.suppadesigner")).As<IExtensionsProvider>().Lifestyle.Singleton();
+                registrationBlock.Export<ImportExtensionsViewModel>().Lifestyle.Singleton();
             });
         }
 
         public static MainViewModel Root => Container.Locate<MainViewModel>();
+
+        public ImportExtensionsViewModel Import => Container.Locate<ImportExtensionsViewModel>();
     }
 }

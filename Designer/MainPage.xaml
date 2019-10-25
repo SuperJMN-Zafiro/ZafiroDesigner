@@ -104,6 +104,7 @@
                     <parts:PropertiesControl />
                 </ct:HeaderedContentControl>
             </Grid>
+            <parts:ImportExtensionsControl Grid.Row="1" Background="Red" />
         </Grid>
         <ct:Loading IsLoading="{Binding IsBusy}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                           VerticalContentAlignment="Stretch"
