@@ -35,7 +35,7 @@
                     </DataTemplate>
                 </objEditor:Editor.Template>
                 <objEditor:Editor.Key>
-                    <objEditor:EditorKey TargetTypeString="Designer.Model.Color, Designer.Model"  />
+                    <objEditor:EditorKey TargetTypeString="Designer.Domain.Models.Color, Designer.Domain.Models.Model"  />
                 </objEditor:Editor.Key>
             </objEditor:Editor>
             <objEditor:Editor>

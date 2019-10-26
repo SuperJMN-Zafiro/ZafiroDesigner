@@ -31,7 +31,7 @@
                     <interactivity:Interaction.Behaviors>
                         <behaviors1:Blur
                             Value="2.67"
-                            Duration="698.28"
+                            Duration="700"
                             Delay="0"
                             AutomaticallyStart="True">
                         </behaviors1:Blur>

@@ -15,7 +15,6 @@
     xmlns:core="using:Designer.Core"
     xmlns:designer1="using:Designer"
     xmlns:items="using:Designer.Domain.ViewModels"
-    xmlns:converters="using:Zafiro.Uwp.Controls.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">

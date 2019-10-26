@@ -4,8 +4,6 @@ using Designer.Domain.Models;
 using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Content;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
-using Grace.DependencyInjection;
-
 
 namespace Designer.Core.Persistence
 {
@@ -13,7 +11,7 @@ namespace Designer.Core.Persistence
     {
         private readonly IExtendedXmlSerializer serializer;
 
-        public ProjectStore(ILocatorService locator)
+        public ProjectStore()
         {
             serializer = new ConfigurationContainer()
                 .UseAutoFormatting()

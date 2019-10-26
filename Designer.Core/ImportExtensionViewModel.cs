@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -36,7 +37,11 @@ namespace Designer.Core
 
         private async Task<Project> ImportProject()
         {
-            var file = await picker.Pick("Import", new[] {".qdf"});
+            var fileTypes = await service.Request(new Payload(new Dictionary<string, object>()) {["Command"] = "FileTypes"});
+            var asArrays = fileTypes.Select(x => x.Value).Cast<string[]>();
+            var extensions = asArrays.SelectMany(types => types);
+
+            var file = await picker.Pick("Import", extensions.ToArray());
 
             if (file == null)
             {
