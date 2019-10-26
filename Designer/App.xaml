@@ -37,6 +37,8 @@
                 <convs:BoolToVisibilityConverter></convs:BoolToVisibilityConverter>
             </vconvs:ValueConverterGroup>
 
+            <convs:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
             <local:Composition x:Key="Composition" />
 
         </ResourceDictionary>

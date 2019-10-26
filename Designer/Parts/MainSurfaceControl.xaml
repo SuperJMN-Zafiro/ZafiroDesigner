@@ -1,0 +1,107 @@
+﻿<UserControl
+    x:Class="Designer.Parts.MainSurfaceControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Designer.Parts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:viewModels="using:Designer.Domain.ViewModels"
+    xmlns:core="using:Designer.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="357"
+    d:DesignWidth="628" d:DataContext="{d:DesignInstance core:MainViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <local:MenuControl />
+
+        <Grid DataContext="{Binding Project}" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+
+            <local:ToolsControl VerticalAlignment="Center" Visibility="{Binding SelectedDocument, Converter={StaticResource NullToVisibilityConverter}}" />
+
+            <controls:TabView Grid.Column="1" ItemsSource="{Binding Documents}"
+                       SelectedItem="{Binding SelectedDocument, Mode=TwoWay}">
+
+                <controls:TabView.TabActionHeader>
+                    <Button Command="{Binding AddDocument}" 
+                                Margin="-1,0,0,0"
+                                BorderThickness="1"
+                                Background="Transparent">
+                        <SymbolIcon Symbol="Add" />
+                    </Button>
+                </controls:TabView.TabActionHeader>
+
+                <controls:TabView.ItemHeaderTemplate>
+                    <DataTemplate x:DataType="viewModels:Document">
+                        <Grid Background="Transparent">
+
+                            <Grid.ContextFlyout>
+                                <Flyout>
+                                    <TextBox Header="Rename" Text="{Binding Name, Mode=TwoWay}" />
+                                </Flyout>
+                            </Grid.ContextFlyout>
+
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </controls:TabView.ItemHeaderTemplate>
+
+                <controls:TabView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollViewer ZoomMode="Enabled" VerticalScrollMode="Enabled" 
+                                          d:DataContext="{d:DesignInstance viewModels:Document}"
+                                          HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                            <local:EditorControl />
+                        </ScrollViewer>
+                    </DataTemplate>
+                </controls:TabView.ItemTemplate>
+            </controls:TabView>
+
+            <controls:GridSplitter Grid.Column="2" Opacity="0.5" />
+
+            <controls:HeaderedContentControl Header="Properties" Grid.Column="3" >
+
+                <controls:HeaderedContentControl.Style>
+                    <Style TargetType="controls:HeaderedContentControl" >
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="controls:HeaderedContentControl">
+                                    <Border
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Border Background="{TemplateBinding Background}" Padding="{ThemeResource ButtonBorderThemeThickness}">
+                                                <TextBlock Text="{TemplateBinding Header}" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="{ThemeResource AppBarBorderThemeBrush}"/>
+                                            </Border>
+                                            <ContentPresenter Grid.Row="1" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </controls:HeaderedContentControl.Style>
+                <local:PropertiesControl />
+            </controls:HeaderedContentControl>
+        </Grid>
+
+    </Grid>
+</UserControl>

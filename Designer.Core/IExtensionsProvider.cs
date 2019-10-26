@@ -6,7 +6,7 @@ namespace Designer.Core
 {
     public interface IExtensionsProvider
     {
-        IObservable<IChangeSet<ExtensionViewModel, string>> ObservableChangeset { get; }
-        ReadOnlyObservableCollection<ExtensionViewModel> Extensions { get; }
+        IObservable<IChangeSet<ImportExtensionViewModel, string>> ObservableChangeset { get; }
+        ReadOnlyObservableCollection<ImportExtensionViewModel> Extensions { get; }
     }
 }

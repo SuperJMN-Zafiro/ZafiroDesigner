@@ -1,6 +1,6 @@
 using System.IO;
 using System.Threading.Tasks;
-using Designer.Domain.ViewModels;
+using Designer.Domain.Models;
 
 namespace Designer.Core
 {

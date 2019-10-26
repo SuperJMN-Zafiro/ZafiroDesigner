@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Designer.Domain.ViewModels;
 using ReactiveUI;
 using Zafiro.Core;
+using Document = Designer.Domain.Models.Document;
 
 namespace Designer.Core
 {
@@ -13,12 +14,14 @@ namespace Designer.Core
     {
         private readonly ObservableAsPropertyHelper<bool> isBusy;
         private readonly ObservableAsPropertyHelper<Project> project;
+        private readonly IProjectMapper mapper;
         private readonly IProjectStore projectStore;
         private bool isImportVisible;
 
-        public MainViewModel(IFilePicker filePicker, IViewModelFactory viewModelFactory,
-            IProjectStore projectStore)
+        public MainViewModel(IFilePicker filePicker, IProjectMapper mapper,
+            IProjectStore projectStore, ImportExtensionsViewModel importViewModel)
         {
+            this.mapper = mapper;
             this.projectStore = projectStore;
 
             var saveExtensions = new[]
@@ -30,19 +33,40 @@ namespace Designer.Core
             Load = ReactiveCommand.CreateFromObservable(() =>
                 LoadProject(filePicker, new[] {Constants.FileFormatExtension}));
 
-            New = ReactiveCommand.Create(viewModelFactory.CreateProject);
+            New = ReactiveCommand.Create(CreateNewDocument);
+
             Save = ReactiveCommand.CreateFromObservable(() => SaveProject(filePicker, Project, saveExtensions));
 
-            var projects = Load.Merge(New);
-            project = projects.ToProperty(this, model => model.Project);
+            var projects = Load.Merge(New).Merge(importViewModel.ImportedProjects.Do(_ => IsImportVisible = false));
+            project = projects
+                .Select(mapper.Map)
+                .ToProperty(this, model => model.Project);
 
-            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).ToProperty(this, x => x.IsBusy);
+            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).Merge(importViewModel.Import.IsExecuting).ToProperty(this, x => x.IsBusy);
+
             New.Execute().Subscribe();
 
             ShowImport = ReactiveCommand.Create(() => IsImportVisible = true);
+            HideImport = ReactiveCommand.Create(() => IsImportVisible = false);
+        }
+
+        private static Domain.Models.Project CreateNewDocument()
+        {
+            return new Domain.Models.Project
+            {
+                Documents = new List<Document>
+                {
+                    new Document
+                    {
+                        Name = "New document",
+                    }
+                }
+            };
         }
 
         public ReactiveCommand<Unit, bool> ShowImport { get; set; }
+
+        public ReactiveCommand<Unit, bool> HideImport { get; set; }
 
         public bool IsImportVisible
         {
@@ -56,18 +80,18 @@ namespace Designer.Core
 
         public Project Project => project.Value;
 
-        public ReactiveCommand<Unit, Project> New { get; }
+        public ReactiveCommand<Unit, Domain.Models.Project> New { get; }
 
-        public ReactiveCommand<Unit, Project> Load { get; }
+        public ReactiveCommand<Unit, Domain.Models.Project> Load { get; }
 
         
-        private IObservable<Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
+        private IObservable<Domain.Models.Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {
             return filePicker.Pick("Load", loadExtensions)
                 .SelectMany(file => LoadProject(file, projectStore));
         }
 
-        private async Task<Project> LoadProject(ZafiroFile file, IProjectStore loader)
+        private async Task<Domain.Models.Project> LoadProject(ZafiroFile file, IProjectStore loader)
         {
             if (loader == null)
             {
@@ -91,7 +115,8 @@ namespace Designer.Core
         {
             using (var stream = await file.OpenForWrite())
             {
-                await projectStore.Save(project, stream);
+                var model = mapper.Map(project);
+                await projectStore.Save(model, stream);
                 await stream.FlushAsync();
                 return project;
             }

@@ -14,99 +14,15 @@
     DataContext="{Binding Source={StaticResource Composition}, Path=Root}">
 
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
 
-            <parts:MenuControl />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            <Grid DataContext="{Binding Project}" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="300" />
-                </Grid.ColumnDefinitions>
+        <parts:MainSurfaceControl Grid.ColumnSpan="2" />
 
-                <parts:ToolsControl VerticalAlignment="Center" Visibility="{Binding SelectedDocument, Converter={StaticResource NullToVisibilityConverter}}" />
-
-                <ct:TabView Grid.Column="1" ItemsSource="{Binding Documents}"
-                       SelectedItem="{Binding SelectedDocument, Mode=TwoWay}">
-
-                    <ct:TabView.TabActionHeader>
-                        <Button Command="{Binding AddDocument}" 
-                                Margin="-1,0,0,0"
-                                BorderThickness="1"
-                                Background="Transparent">
-                            <SymbolIcon Symbol="Add" />
-                        </Button>
-                    </ct:TabView.TabActionHeader>
-
-                    <ct:TabView.ItemHeaderTemplate>
-                        <DataTemplate x:DataType="items:Document">
-                            <Grid Background="Transparent">
-
-                                <Grid.ContextFlyout>
-                                    <Flyout>
-                                        <TextBox Header="Rename" Text="{Binding Name, Mode=TwoWay}" />
-                                    </Flyout>
-                                </Grid.ContextFlyout>
-
-                                <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ct:TabView.ItemHeaderTemplate>
-
-                    <ct:TabView.ItemTemplate>
-                        <DataTemplate>
-                            <ScrollViewer ZoomMode="Enabled" VerticalScrollMode="Enabled" 
-                                          d:DataContext="{d:DesignInstance items:Document}"
-                                          HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
-                                <parts:EditorControl />
-                            </ScrollViewer>
-                        </DataTemplate>
-                    </ct:TabView.ItemTemplate>
-                </ct:TabView>
-
-                <ct:GridSplitter Grid.Column="2" Opacity="0.5" />
-
-                <ct:HeaderedContentControl Header="Properties" Grid.Column="3" >
-
-                    <ct:HeaderedContentControl.Style>
-                        <Style TargetType="ct:HeaderedContentControl" >
-                            <Setter Property="BorderThickness" Value="1" />
-                            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ct:HeaderedContentControl">
-                                        <Border
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition />
-                                                </Grid.RowDefinitions>
-                                                <Border Background="{TemplateBinding Background}" Padding="{ThemeResource ButtonBorderThemeThickness}">
-                                                    <TextBlock Text="{TemplateBinding Header}" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="{ThemeResource AppBarBorderThemeBrush}"/>
-                                                </Border>
-                                                <ContentPresenter Grid.Row="1" />
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ct:HeaderedContentControl.Style>
-                    <parts:PropertiesControl />
-                </ct:HeaderedContentControl>
-            </Grid>
-            <parts:ImportExtensionsControl Grid.Row="1" Background="Red" />
-        </Grid>
-        <ct:Loading IsLoading="{Binding IsBusy}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+        <ct:Loading Grid.Column="0" Grid.ColumnSpan="2" IsLoading="{Binding IsBusy}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                           VerticalContentAlignment="Stretch"
                           HorizontalContentAlignment="Stretch">
             <Grid>
@@ -126,6 +42,9 @@
 
             </Grid>
         </ct:Loading>
+
+        <parts:ImportExtensionsControl Grid.Column="0"
+                                       Visibility="{Binding IsImportVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
     </Grid>
 
 </Page>

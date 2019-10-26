@@ -106,12 +106,18 @@
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />
+    <Compile Include="Extensions\AppServiceExtensions.cs" />
+    <Compile Include="Extensions\ServiceException.cs" />
+    <Compile Include="Extensions\WindowsAppService.cs" />
     <Compile Include="Parts\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ExtensionsProvider.cs" />
     <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
       <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\MainSurfaceControl.xaml.cs">
+      <DependentUpon>MainSurfaceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parts\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -127,6 +133,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\TypeNameConverter.cs" />
+    <Compile Include="ServiceFactory.cs" />
     <Compile Include="TemplateSelectors\TypeNameTemplateSelector.cs" />
     <Compile Include="Converters\WindowsColorToBrushConverter.cs" />
   </ItemGroup>
@@ -210,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Parts\ImportExtensionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\MainSurfaceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

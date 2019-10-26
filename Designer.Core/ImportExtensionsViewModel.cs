@@ -1,7 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Reactive;
 using Designer.Domain.Models;
 using DynamicData;
+using DynamicData.Binding;
 using ReactiveUI;
 
 namespace Designer.Core
@@ -13,13 +15,20 @@ namespace Designer.Core
         public ImportExtensionsViewModel(IExtensionsProvider provider)
         {
             this.provider = provider;
-            ImportedProjects = provider.ObservableChangeset
+
+            Import = ReactiveCommand.CreateFromObservable(() => provider.Extensions
+                .ToObservableChangeSet()
+                .MergeMany(x => x.Import));
+
+            ImportedProjects = provider.Extensions
+                .ToObservableChangeSet()
                 .MergeMany(x => x.Import);
         }
 
         public IObservable<Project> ImportedProjects { get; }
 
-        public ReadOnlyObservableCollection<ExtensionViewModel> Extensions => provider.Extensions;
+        public ReactiveCommand<Unit, Project> Import { get; }
 
+        public ReadOnlyObservableCollection<ImportExtensionViewModel> Extensions => provider.Extensions;
     }
 }

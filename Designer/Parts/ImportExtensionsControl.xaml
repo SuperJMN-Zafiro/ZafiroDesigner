@@ -2,36 +2,51 @@
     x:Class="Designer.Parts.ImportExtensionsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Designer.Parts"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:designer="using:Designer"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:core="using:Designer.Core"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d"
     d:DesignHeight="197.25"
-    d:DesignWidth="298.75" DataContext="{Binding Source={StaticResource Composition}, Path=Import}">
+    d:DesignWidth="298.75" d:DataContext="{d:DesignInstance core:MainViewModel}">
 
-    
+    <animations:Implicit.ShowAnimations>
+        <animations:TranslationAnimation Duration="0:0:1" From="-200, 0, 0" To="0" ></animations:TranslationAnimation>
+        <animations:OpacityAnimation Duration="0:0:0.5" From="0" To="1.0"></animations:OpacityAnimation>
+    </animations:Implicit.ShowAnimations>
+
+    <animations:Implicit.HideAnimations>
+        <animations:TranslationAnimation Duration="0:0:1" From="0" To="-200, 0, 0" ></animations:TranslationAnimation>
+        <animations:ScalarAnimation Target="Opacity" Duration="0:0:0.5" To="0"></animations:ScalarAnimation>
+    </animations:Implicit.HideAnimations>
+
     <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <ListView RelativePanel.AlignTopWithPanel="True" ItemsSource="{Binding Extensions}">
+            <ListView DataContext="{Binding Source={StaticResource Composition}, Path=Import}" RelativePanel.AlignTopWithPanel="True" ItemsSource="{Binding Extensions}">
+                <ListView.Header>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Import" Margin="10"></TextBlock>
+                </ListView.Header>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="core:ExtensionViewModel">
+                    <DataTemplate x:DataType="core:ImportExtensionViewModel">
                         <Grid ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Logo, Converter={StaticResource ImageConverter}}" Height="100" />
                             <controls:UniformGrid Grid.Column="1" Columns="1" VerticalAlignment="Center">
@@ -46,6 +61,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <Button Grid.Row="1" HorizontalAlignment="Center" Content="Close" Command="{Binding HideImport}" />
         </Grid>
     </Grid>
 </UserControl>

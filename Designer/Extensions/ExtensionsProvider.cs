@@ -1,50 +1,37 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.AppExtensions;
+using Windows.Foundation;
 using Designer.Core;
 using DynamicData;
 using ReactiveUI;
+using Zafiro.Core;
 
 namespace Designer.Extensions
 {
     public class ExtensionsProvider : ReactiveObject, IExtensionsProvider
     {
+        private readonly IServiceFactory factory;
+        private readonly IFilePicker picker;
         private readonly CompositeDisposable refreshers = new CompositeDisposable();
         private readonly CompositeDisposable disposables = new CompositeDisposable();
 
-        private ReadOnlyObservableCollection<ExtensionViewModel> extensions;
-        private readonly IObservable<IChangeSet<ExtensionViewModel, string>> observableChangeset;
+        private ReadOnlyObservableCollection<ImportExtensionViewModel> extensions;
+        private readonly IObservable<IChangeSet<ImportExtensionViewModel, string>> observableChangeset;
 
-        public IObservable<IChangeSet<ExtensionViewModel, string>> ObservableChangeset => observableChangeset;
+        public IObservable<IChangeSet<ImportExtensionViewModel, string>> ObservableChangeset => observableChangeset;
 
-        public ExtensionsProvider(string contract)
+        public ExtensionsProvider(string contract, IServiceFactory factory, IFilePicker picker)
         {
+            this.factory = factory;
+            this.picker = picker;
             var catalog = AppExtensionCatalog.Open(contract);
             var source = new SourceCache<AppExtension, string>(a => a.Id);
-
-            //Invoke = ReactiveCommand.CreateFromTask(async () =>
-            //{
-            //    var connection = new AppServiceConnection();
-
-            //    var props = await SelectedExtension.GetExtensionPropertiesAsync();
-            //    var serviceName = (string)((PropertySet)props["Service"])["#text"];
-
-            //    connection.PackageFamilyName = SelectedExtension.Package.Id.FamilyName;
-            //    connection.AppServiceName = serviceName;
-
-            //    var status = await connection.OpenAsync();
-            //    if (status == AppServiceConnectionStatus.Success)
-            //    {
-            //        var valueSet = new ValueSet();
-            //        valueSet["Command"] = "Import";
-            //        byte[] bytes = await GetBytes();
-            //        valueSet["Data"] = bytes;
-            //        var message = await connection.SendMessageAsync(valueSet);
-            //    }
-            //}, this.WhenAnyValue(x => x.SelectedExtension).Select(x => x != null));
 
             Connect = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -72,9 +59,28 @@ namespace Designer.Extensions
                 return Unit.Default;
             });
 
+            Func<Task<byte[]>> GetLogo(AppExtension appExtension)
+            {
+                return async () =>
+                {
+                    var open = await appExtension.AppInfo.DisplayInfo.GetLogo(new Size(1, 1)).OpenReadAsync();
+                    var stream = open.AsStreamForRead();
+                    return await stream.ReadBytes();
+                };
+            }
+
+            Func<Task<IDictionaryBasedService>> GetService(AppExtension appExtension)
+            {
+                return async () =>
+                {
+                    var connInfo = await appExtension.GetConnectionInfo();
+                    return factory.Create(connInfo.Item1, connInfo.Item2); 
+                };
+            }
+
             observableChangeset = source
                 .Connect()
-                .Transform(ext => new ExtensionViewModel(ext.DisplayName, ext.Description, null));
+                .Transform(ext => new ImportExtensionViewModel(ext.DisplayName, ext.Description, GetLogo(ext), GetService(ext), picker));
 
             observableChangeset
                 .Bind(out extensions)
@@ -88,7 +94,7 @@ namespace Designer.Extensions
 
         public ReactiveCommand<Unit, Unit> Connect { get; set; }
 
-        public ReadOnlyObservableCollection<ExtensionViewModel> Extensions
+        public ReadOnlyObservableCollection<ImportExtensionViewModel> Extensions
         {
             get => extensions;
             set => extensions = value;
