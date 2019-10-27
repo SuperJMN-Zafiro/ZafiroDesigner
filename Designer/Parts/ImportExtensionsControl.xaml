@@ -9,7 +9,7 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d"
     d:DesignHeight="197.25"
-    d:DesignWidth="298.75" d:DataContext="{d:DesignInstance core:MainViewModel}">
+    d:DesignWidth="298.75" d:DataContext="{d:DesignInstance core:MainViewModel}" x:Name="UserControl">
 
     <animations:Implicit.ShowAnimations>
         <animations:TranslationAnimation Duration="0:0:1" From="-200, 0, 0" To="0" ></animations:TranslationAnimation>
@@ -21,47 +21,52 @@
         <animations:ScalarAnimation Target="Opacity" Duration="0:0:0.5" To="0"></animations:ScalarAnimation>
     </animations:Implicit.HideAnimations>
 
-    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+    <Grid  Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <ListView DataContext="{Binding Source={StaticResource Composition}, Path=Import}" RelativePanel.AlignTopWithPanel="True" ItemsSource="{Binding Extensions}">
-                <ListView.Header>
-                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Import" Margin="10"></TextBlock>
-                </ListView.Header>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="core:ImportExtensionViewModel">
-                        <Grid ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Logo, Converter={StaticResource ImageConverter}}" Height="100" />
-                            <controls:UniformGrid Grid.Column="1" Columns="1" VerticalAlignment="Center">
-                                <TextBlock FontWeight="Bold"
-                                           Text="{Binding Name}" HorizontalAlignment="Stretch" />
-                                <TextBlock Text="{Binding Description}"
-                                           HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-                            </controls:UniformGrid>
-                            <Button Grid.Column="2" HorizontalAlignment="Center" Command="{Binding Import}" Content="Import" />
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
 
-            <Button Grid.Row="1" HorizontalAlignment="Center" Content="Close" Command="{Binding HideImport}" />
-        </Grid>
+          
+        <ListView Background="{ThemeResource AppBarBackgroundThemeBrush}" Grid.Row="1" DataContext="{Binding Source={StaticResource Composition}, Path=Import}" RelativePanel.AlignTopWithPanel="True" ItemsSource="{Binding Extensions}">
+            <ListView.Header>
+                <controls:DockPanel>
+
+                    <Button controls:DockPanel.Dock="Left" HorizontalAlignment="Center" Command="{Binding ElementName=UserControl, Path=DataContext.HideImport}">
+                        <Button.Content>
+                            <SymbolIcon Symbol="Back"/>
+                        </Button.Content>
+                    </Button>
+
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Import" Margin="10" />
+
+                </controls:DockPanel>
+            </ListView.Header>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="core:ImportViewModel">
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Logo, Converter={StaticResource ImageConverter}}" Height="100" />
+                        <controls:UniformGrid Grid.Column="1" Columns="1" VerticalAlignment="Center">
+                            <TextBlock FontWeight="Bold"
+                                       Text="{Binding Name}" HorizontalAlignment="Stretch" />
+                            <TextBlock Text="{Binding Description}"
+                                       HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+                        </controls:UniformGrid>
+                        <Button Grid.Column="2" HorizontalAlignment="Center" Command="{Binding Import}" Content="Import" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
+
 </UserControl>

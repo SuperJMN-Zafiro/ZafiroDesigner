@@ -21,10 +21,10 @@ namespace Designer.Extensions
         private readonly CompositeDisposable refreshers = new CompositeDisposable();
         private readonly CompositeDisposable disposables = new CompositeDisposable();
 
-        private ReadOnlyObservableCollection<ImportExtensionViewModel> extensions;
-        private readonly IObservable<IChangeSet<ImportExtensionViewModel, string>> observableChangeset;
+        private ReadOnlyObservableCollection<ImportViewModel> extensions;
+        private readonly IObservable<IChangeSet<ImportViewModel, string>> observableChangeset;
 
-        public IObservable<IChangeSet<ImportExtensionViewModel, string>> ObservableChangeset => observableChangeset;
+        public IObservable<IChangeSet<ImportViewModel, string>> ObservableChangeset => observableChangeset;
 
         public ExtensionsProvider(string contract, IServiceFactory factory, IFilePicker picker)
         {
@@ -80,7 +80,7 @@ namespace Designer.Extensions
 
             observableChangeset = source
                 .Connect()
-                .Transform(ext => new ImportExtensionViewModel(ext.DisplayName, ext.Description, GetLogo(ext), GetService(ext), picker));
+                .Transform(ext => new ImportViewModel(ext.DisplayName, ext.Description, GetLogo(ext), GetService(ext), picker));
 
             observableChangeset
                 .Bind(out extensions)
@@ -94,7 +94,7 @@ namespace Designer.Extensions
 
         public ReactiveCommand<Unit, Unit> Connect { get; set; }
 
-        public ReadOnlyObservableCollection<ImportExtensionViewModel> Extensions
+        public ReadOnlyObservableCollection<ImportViewModel> Extensions
         {
             get => extensions;
             set => extensions = value;

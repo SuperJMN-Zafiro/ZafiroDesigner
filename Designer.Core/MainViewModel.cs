@@ -42,7 +42,7 @@ namespace Designer.Core
                 .Select(mapper.Map)
                 .ToProperty(this, model => model.Project);
 
-            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).Merge(importViewModel.Import.IsExecuting).ToProperty(this, x => x.IsBusy);
+            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).Merge(importViewModel.IsBusy).ToProperty(this, x => x.IsBusy);
 
             New.Execute().Subscribe();
 

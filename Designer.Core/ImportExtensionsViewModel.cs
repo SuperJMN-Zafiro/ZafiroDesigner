@@ -16,19 +16,20 @@ namespace Designer.Core
         {
             this.provider = provider;
 
-            Import = ReactiveCommand.CreateFromObservable(() => provider.Extensions
-                .ToObservableChangeSet()
-                .MergeMany(x => x.Import));
 
             ImportedProjects = provider.Extensions
                 .ToObservableChangeSet()
                 .MergeMany(x => x.Import);
+
+            IsBusy = provider.Extensions
+                .ToObservableChangeSet()
+                .MergeMany(x => x.Import.IsExecuting);
         }
+
+        public IObservable<bool> IsBusy { get; }
 
         public IObservable<Project> ImportedProjects { get; }
 
-        public ReactiveCommand<Unit, Project> Import { get; }
-
-        public ReadOnlyObservableCollection<ImportExtensionViewModel> Extensions => provider.Extensions;
+        public ReadOnlyObservableCollection<ImportViewModel> Extensions => provider.Extensions;
     }
 }

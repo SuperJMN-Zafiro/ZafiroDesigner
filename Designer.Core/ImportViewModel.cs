@@ -11,7 +11,7 @@ using Zafiro.Core;
 
 namespace Designer.Core
 {
-    public class ImportExtensionViewModel : ReactiveObject
+    public class ImportViewModel : ReactiveObject
     {
         private readonly IFilePicker picker;
         private IDictionaryBasedService service;
@@ -19,7 +19,7 @@ namespace Designer.Core
         public string Name { get; }
         public string Description { get; }
 
-        public ImportExtensionViewModel(string name, string description, Func<Task<byte[]>> getLogo, Func<Task<IDictionaryBasedService>> getService, IFilePicker picker)
+        public ImportViewModel(string name, string description, Func<Task<byte[]>> getLogo, Func<Task<IDictionaryBasedService>> getService, IFilePicker picker)
         {
             this.picker = picker;
             Observable.FromAsync(getLogo).Subscribe(bytes => Logo = bytes);

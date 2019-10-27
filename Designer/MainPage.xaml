@@ -22,9 +22,12 @@
 
         <parts:MainSurfaceControl Grid.ColumnSpan="2" />
 
+        <parts:ImportExtensionsControl Grid.Column="0"
+                                       Visibility="{Binding IsImportVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+
         <ct:Loading Grid.Column="0" Grid.ColumnSpan="2" IsLoading="{Binding IsBusy}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                          VerticalContentAlignment="Stretch"
-                          HorizontalContentAlignment="Stretch">
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch">
             <Grid>
 
                 <Border Background="#83FFFFFF" >
@@ -42,9 +45,6 @@
 
             </Grid>
         </ct:Loading>
-
-        <parts:ImportExtensionsControl Grid.Column="0"
-                                       Visibility="{Binding IsImportVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
     </Grid>
 
 </Page>
