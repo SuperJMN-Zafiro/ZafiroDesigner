@@ -59,7 +59,8 @@ namespace Designer.Core
             config.CreateMap<Domain.ViewModels.Ellipse, Ellipse>(MemberList.Destination);
             config.CreateMap<Domain.ViewModels.Line, Line>(MemberList.Destination);
             config.CreateMap<Domain.ViewModels.TextBox, TextBox>(MemberList.Destination);
-            config.CreateMap<Domain.ViewModels.Field, Field>(MemberList.Destination);
+            config.CreateMap<Domain.ViewModels.NumericField, NumericField>(MemberList.Destination);
+            config.CreateMap<Domain.ViewModels.TextField, TextField>(MemberList.Destination);
             config.CreateMap<Domain.ViewModels.Image, Image>(MemberList.Destination);
             config.CreateMap<Domain.ViewModels.Shadow, Shadow>(MemberList.Destination);
         }

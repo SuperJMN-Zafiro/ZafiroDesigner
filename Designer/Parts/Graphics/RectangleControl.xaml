@@ -10,7 +10,7 @@
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Rectangle}">
 
     <Grid>
-        <Border Background="Black"
+        <Border Background="{Binding Shadow.Color, Converter={StaticResource ColorToBrushConverter}}"
                 Visibility="{Binding Path=Shadow.Distance, Converter={StaticResource ZeroToCollapsedConverter}}"
                 CornerRadius="{Binding CornerRadius, Converter={StaticResource CornerRadiusConverter}}">
             <Border.RenderTransform>

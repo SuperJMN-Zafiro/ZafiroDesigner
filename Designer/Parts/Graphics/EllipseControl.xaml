@@ -7,11 +7,22 @@
     xmlns:viewModels="using:Designer.Domain.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    xmlns:items="using:Designer.Domain.ViewModels"
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Ellipse}">
 
-    <Ellipse d:DataContext="{d:DesignInstance viewModels:Ellipse}"
-             Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
-             Fill="{Binding TintedBackground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
-             StrokeThickness="{Binding StrokeWidth}">
-    </Ellipse>
+    <Grid>
+        <Ellipse Fill="{Binding Shadow.Color, Converter={StaticResource ColorToBrushConverter}}"
+                Visibility="{Binding Path=Shadow.Distance, Converter={StaticResource ZeroToCollapsedConverter}}">
+            <Ellipse.RenderTransform>
+                <TranslateTransform
+                    X="{Binding Shadow.ShadowX, Mode=OneWay}"
+                    Y="{Binding Shadow.ShadowY, Mode=OneWay}" />
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse d:DataContext="{d:DesignInstance viewModels:Ellipse}"
+                 Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
+                 Fill="{Binding TintedBackground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
+                 StrokeThickness="{Binding StrokeWidth}">
+        </Ellipse>
+    </Grid>
 </UserControl>
