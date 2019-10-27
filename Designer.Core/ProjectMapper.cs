@@ -28,7 +28,7 @@ namespace Designer.Core
 
             config.CreateMap<Graphic, Domain.ViewModels.Graphic>(MemberList.Source)
                 .IncludeAllDerived();
-            config.CreateMap<Shape, Domain.ViewModels.Shape>(MemberList.Source)
+            config.CreateMap<RectangularGraphic, Domain.ViewModels.RectangularGraphic>(MemberList.Source)
                 .IncludeAllDerived();
             config.CreateMap<Field, Domain.ViewModels.Field>(MemberList.Source)
                 .IncludeAllDerived();
@@ -50,7 +50,7 @@ namespace Designer.Core
 
             config.CreateMap<Domain.ViewModels.Graphic, Graphic>(MemberList.Source)
                 .IncludeAllDerived();
-            config.CreateMap<Domain.ViewModels.Shape, Shape>(MemberList.Source)
+            config.CreateMap<Domain.ViewModels.RectangularGraphic, RectangularGraphic>(MemberList.Source)
                 .IncludeAllDerived();
             config.CreateMap<Domain.ViewModels.Field, Field>(MemberList.Source)
                 .IncludeAllDerived();

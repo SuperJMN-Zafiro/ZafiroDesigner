@@ -8,6 +8,20 @@ namespace Designer.Domain.ViewModels
         private double distance;
         private double angle;
         private Color color;
+        private readonly ObservableAsPropertyHelper<double> shadowX;
+        private readonly ObservableAsPropertyHelper<double> shadowY;
+
+        public Shadow()
+        {
+            shadowX = this.WhenAnyValue(x => x.Angle, x => x.Distance,
+                ValueConversion.PolarToCartesianX).ToProperty(this, x => x.ShadowX);
+            shadowY = this.WhenAnyValue(x => x.Angle, x => x.Distance,
+                ValueConversion.PolarToCartesianY).ToProperty(this, x => x.ShadowY);
+        }
+
+        public double ShadowX => shadowX.Value;
+        public double ShadowY => shadowY.Value;
+
 
         public double Distance
         {

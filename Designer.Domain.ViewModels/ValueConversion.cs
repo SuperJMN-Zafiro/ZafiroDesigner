@@ -1,11 +1,9 @@
 using System;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml;
 using Designer.Domain.Models;
 
-namespace Designer.Converters
+namespace Designer.Domain.ViewModels
 {
-    public static class MyConverter
+    public static class ValueConversion
     {
         public static double PolarToCartesianX(double angle, double distance)
         {
@@ -19,35 +17,21 @@ namespace Designer.Converters
             return Math.Sin(rad) * distance;
         }
 
-        public static Visibility DistanceToVisibility(double distance)
-        {
-            if (Math.Abs(distance) < 1)
-            {
-                return Visibility.Collapsed;
-            }
 
-            return Visibility.Visible;
-        }
-        
-        public static SolidColorBrush TintColor(Color color, double tint)
-        {           
-            return new SolidColorBrush(Windows.UI.Color.FromArgb(
+        public static Color TintColor(Color color, double tint)
+        {
+            return new Color(
                 color.A,
                 ApplyTint(color.R, tint),
                 ApplyTint(color.G, tint),
                 ApplyTint(color.B, tint)
-            ));
+            );
         }
 
         public static byte ApplyTint(byte component, double tint)
         {
             var resultingValue = (1.0 - tint) * 255 + tint * component;
             return (byte)resultingValue;
-        }
-
-        public static CornerRadius DoubleToCornerRadius(double v)
-        {
-            return new CornerRadius(v);
         }
 
         public static double Negate(double n)

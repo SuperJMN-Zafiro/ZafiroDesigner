@@ -1,6 +1,6 @@
 namespace Designer.Domain.ViewModels
 {
-    public class Ellipse : Shape
+    public class Ellipse : RectangularGraphic
     {
     }
 }

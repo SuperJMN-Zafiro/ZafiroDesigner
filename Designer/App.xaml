@@ -38,8 +38,14 @@
             </vconvs:ValueConverterGroup>
 
             <convs:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <vconvs:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+            <vconvs:ThicknessConverter x:Key="ThicknessConverter" />
+            <vconvs:CornerRadiusConverter x:Key="CornerRadiusConverter" />
+            <local:ChangeSignConverter x:Key="VerticalOffsetConverter" />
+            <vconvs:ZeroToCollapsedConverter x:Key="ZeroToCollapsedConverter" />
 
             <local:Composition x:Key="Composition" />
+            <vconvs:DoubleToCornerRadiusConverter x:Key="DoubleToCornerRadiusConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

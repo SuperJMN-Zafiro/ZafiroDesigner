@@ -1,17 +1,7 @@
 namespace Designer.Domain.Models
 {
-    public class Rectangle : Shape
+    public class Rectangle : RectangularGraphic
     {
-        public double CornerRadius
-        {
-            get; set;
-        }
-
-        public Shadow Shadow { get; set; } = new Shadow();
-
-        public double Rotation
-        {
-            get; set;
-        }
+        public double CornerRadius { get; set; }
     }
 }

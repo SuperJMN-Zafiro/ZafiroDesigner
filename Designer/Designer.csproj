@@ -100,9 +100,10 @@
     <Compile Include="Composition.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\CornerRadiusConverter.cs" />
+    <Compile Include="Converters\ZeroToCollapsedConverter.cs" />
+    <Compile Include="Converters\DoubleToCornerRadiusConverter.cs" />
     <Compile Include="Converters\MyConverter.cs" />
     <Compile Include="Converters\ThicknessConverter.cs" />
-    <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />
@@ -113,6 +114,24 @@
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ExtensionsProvider.cs" />
+    <Compile Include="Parts\Graphics\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\NumericFieldControl.xaml.cs">
+      <DependentUpon>NumericFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextBoxControl.xaml.cs">
+      <DependentUpon>TextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextFieldControl.xaml.cs">
+      <DependentUpon>TextFieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
       <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
     </Compile>
@@ -213,6 +232,30 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Parts\EditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\EllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\LineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\NumericFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\RectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextFieldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
