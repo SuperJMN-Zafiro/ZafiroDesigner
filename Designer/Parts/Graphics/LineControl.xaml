@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="Designer.Parts.Graphics.LineControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Designer.Parts.Graphics"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:designer="using:Zafiro.Uwp.Designer"
+    xmlns:viewModels="using:Designer.Domain.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:Line}">
+
+    <Canvas>
+        <Line Fill="{Binding Background, Converter={StaticResource ColorToBrushConverter}}"
+            X1="{Binding X1}" Y1="{Binding Y1}"
+            X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="2"
+            Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}" />
+        <designer:DeltaContentControl Canvas.Left="{Binding X1}" Canvas.Top="{Binding Y1}"  Margin="-3,-3,0,0"
+                                      Horizontal="{Binding X1, Mode=TwoWay}"
+                                      Vertical="{Binding Y1, Mode=TwoWay}">
+            <Border Background="Red" Width="6" Height="6" />
+        </designer:DeltaContentControl>
+
+        <designer:DeltaContentControl Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}" 
+                                      Horizontal="{Binding X2, Mode=TwoWay}"
+                                      Vertical="{Binding Y2, Mode=TwoWay}" Margin="-3,-3,0,0">
+            <Border Background="Red" Width="6" Height="6" />
+        </designer:DeltaContentControl>
+
+    </Canvas>
+</UserControl>

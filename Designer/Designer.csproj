@@ -100,15 +100,43 @@
     <Compile Include="Composition.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\CornerRadiusConverter.cs" />
+    <Compile Include="Converters\ZeroToCollapsedConverter.cs" />
+    <Compile Include="Converters\DoubleToCornerRadiusConverter.cs" />
     <Compile Include="Converters\MyConverter.cs" />
     <Compile Include="Converters\ThicknessConverter.cs" />
-    <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="FocusConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />
+    <Compile Include="Extensions\AppServiceExtensions.cs" />
+    <Compile Include="Extensions\ServiceException.cs" />
+    <Compile Include="Extensions\WindowsAppService.cs" />
     <Compile Include="Parts\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ExtensionsProvider.cs" />
+    <Compile Include="Parts\Graphics\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\NumericFieldControl.xaml.cs">
+      <DependentUpon>NumericFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextBoxControl.xaml.cs">
+      <DependentUpon>TextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextFieldControl.xaml.cs">
+      <DependentUpon>TextFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
+      <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\MainSurfaceControl.xaml.cs">
+      <DependentUpon>MainSurfaceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parts\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -124,6 +152,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\TypeNameConverter.cs" />
+    <Compile Include="ServiceFactory.cs" />
     <Compile Include="TemplateSelectors\TypeNameTemplateSelector.cs" />
     <Compile Include="Converters\WindowsColorToBrushConverter.cs" />
   </ItemGroup>
@@ -206,6 +235,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Parts\Graphics\EllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\LineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\NumericFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\RectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\ImportExtensionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\MainSurfaceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Parts\MenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,6 +332,7 @@
       <Name>Zafiro.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -10,6 +10,10 @@ namespace Designer.Domain.Models
 
         public double Height { get; set; }
 
-        public double Angle { get; set; }
+        public Color Background { get; set; }
+
+        public Color Stroke { get; set; }
+
+        public double StrokeWidth { get; set; }
     }
 }

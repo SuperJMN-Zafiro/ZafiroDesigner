@@ -1,3 +1,4 @@
+using Designer.Domain.Models;
 using ReactiveUI;
 
 namespace Designer.Domain.ViewModels
@@ -8,7 +9,9 @@ namespace Designer.Domain.ViewModels
         private double top;
         private double width;
         private double height;
-        private double angle;
+        private Color background;
+        private Color stroke;
+        private double strokeWidth;
 
         public double Left
         {
@@ -34,10 +37,22 @@ namespace Designer.Domain.ViewModels
             set => this.RaiseAndSetIfChanged(ref height, value);
         }
 
-        public double Angle
+        public Color Background
         {
-            get => angle;
-            set => this.RaiseAndSetIfChanged(ref angle, value);
+            get => background;
+            set => this.RaiseAndSetIfChanged(ref background, value);
+        }
+
+        public Color Stroke
+        {
+            get => stroke;
+            set => this.RaiseAndSetIfChanged(ref stroke, value);
+        }
+
+        public double StrokeWidth
+        {
+            get => strokeWidth;
+            set => this.RaiseAndSetIfChanged(ref strokeWidth, value);
         }
     }
 }

@@ -1,14 +1,13 @@
-using System;
-using Windows.UI.Xaml;
+﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace Designer
+namespace Designer.Converters
 {
-    public class FocusConverter : IValueConverter
+    public class DoubleToCornerRadiusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return true;
+            return MyConverter.DoubleToCornerRadius((double) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

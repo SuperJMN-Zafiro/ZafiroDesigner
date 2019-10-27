@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp uap3">
   <Identity Name="SuperJMN.Designer" Publisher="CN=super" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="948402a0-be6b-49f4-a93d-c1e80c1082cf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -21,6 +23,7 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="suppadesignerfiles">
             <uap:SupportedFileTypes>
@@ -30,6 +33,13 @@
             <uap:EditFlags OpenIsSafe="true"/>
           </uap:FileTypeAssociation>
         </uap:Extension>
+
+        <uap3:Extension Category="windows.appExtensionHost">
+          <uap3:AppExtensionHost>
+            <uap3:Name>superjmn.suppadesigner</uap3:Name>
+          </uap3:AppExtensionHost>
+        </uap3:Extension>
+
       </Extensions>
     </Application>
   </Applications>

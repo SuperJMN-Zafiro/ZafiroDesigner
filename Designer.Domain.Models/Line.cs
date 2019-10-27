@@ -2,7 +2,7 @@ using System;
 
 namespace Designer.Domain.Models
 {
-    public class Line : Shape
+    public class Line : Graphic
     {
         private double x1;
         private double x2;
