@@ -38,6 +38,7 @@ namespace Designer
 
                 registrationBlock.Export<ProjectMapper>().As<IProjectMapper>().Lifestyle.Singleton();
                 registrationBlock.Export<ImportExtensionsViewModel>().Lifestyle.Singleton();
+                registrationBlock.Export<MainViewModel>().Lifestyle.Singleton();
             });
         }
 

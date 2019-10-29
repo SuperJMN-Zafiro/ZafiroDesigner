@@ -37,12 +37,25 @@ namespace Designer.Core
 
             Save = ReactiveCommand.CreateFromObservable(() => SaveProject(filePicker, Project, saveExtensions));
 
-            var projects = Load.Merge(New).Merge(importViewModel.ImportedProjects.Do(_ => IsImportVisible = false));
+            LoadFromFile =
+                ReactiveCommand.CreateFromTask<ZafiroFile, Domain.Models.Project>(zafiroFile =>
+                    LoadProject(zafiroFile, projectStore));
+
+            var projects = Load
+                .Merge(New)
+                .Merge(LoadFromFile)
+                .Merge(importViewModel.ImportedProjects)
+                .Do(_ => IsImportVisible = false);
+
             project = projects
                 .Select(mapper.Map)
                 .ToProperty(this, model => model.Project);
 
-            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).Merge(importViewModel.IsBusy).ToProperty(this, x => x.IsBusy);
+            isBusy = Load.IsExecuting
+                .Merge(Save.IsExecuting)
+                .Merge(importViewModel.IsBusy)
+                .Merge(LoadFromFile.IsExecuting)
+                .ToProperty(this, x => x.IsBusy);
 
             New.Execute().Subscribe();
 
@@ -64,9 +77,11 @@ namespace Designer.Core
             };
         }
 
-        public ReactiveCommand<Unit, bool> ShowImport { get; set; }
+        public ReactiveCommand<Unit, bool> ShowImport { get; }
 
-        public ReactiveCommand<Unit, bool> HideImport { get; set; }
+        public ReactiveCommand<Unit, bool> HideImport { get; }
+
+        public ReactiveCommand<ZafiroFile, Domain.Models.Project> LoadFromFile { get; }
 
         public bool IsImportVisible
         {
