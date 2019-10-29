@@ -14,6 +14,6 @@ namespace Designer.Domain.Models
 
         public Color Stroke { get; set; }
 
-        public double StrokeWidth { get; set; }
+        public double StrokeThickness { get; set; }
     }
 }
