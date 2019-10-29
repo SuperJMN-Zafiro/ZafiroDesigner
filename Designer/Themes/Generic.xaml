@@ -1,0 +1,42 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Designer"
+    xmlns:designer="using:Zafiro.Uwp.Designer">
+
+    <Style TargetType="local:BoundsDragDeltaControl1" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:BoundsDragDeltaControl1">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Thumb x:Name="Thumb" Background="Transparent" />
+                            <ContentPresenter IsHitTestVisible="False" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:BoundsDragDeltaControl2" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:BoundsDragDeltaControl2">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Thumb x:Name="Thumb" Background="Transparent" />
+                            <ContentPresenter IsHitTestVisible="False" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

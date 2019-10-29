@@ -22,7 +22,7 @@
         <Ellipse d:DataContext="{d:DesignInstance viewModels:Ellipse}"
                  Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
                  Fill="{Binding TintedBackground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
-                 StrokeThickness="{Binding StrokeWidth}">
+                 StrokeThickness="{Binding StrokeThickness}">
         </Ellipse>
     </Grid>
 </UserControl>

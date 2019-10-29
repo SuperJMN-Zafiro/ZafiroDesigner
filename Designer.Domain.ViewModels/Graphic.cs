@@ -11,7 +11,7 @@ namespace Designer.Domain.ViewModels
         private double height;
         private Color background;
         private Color stroke;
-        private double strokeWidth;
+        private double strokeThickness;
 
         public double Left
         {
@@ -49,10 +49,10 @@ namespace Designer.Domain.ViewModels
             set => this.RaiseAndSetIfChanged(ref stroke, value);
         }
 
-        public double StrokeWidth
+        public double StrokeThickness
         {
-            get => strokeWidth;
-            set => this.RaiseAndSetIfChanged(ref strokeWidth, value);
+            get => strokeThickness;
+            set => this.RaiseAndSetIfChanged(ref strokeThickness, value);
         }
     }
 }

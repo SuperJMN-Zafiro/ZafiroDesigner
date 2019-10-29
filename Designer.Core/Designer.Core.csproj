@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="DumpExtensions" Version="2.0.0" />
     <PackageReference Include="ExtendedXmlSerializer" Version="2.1.24" />
     <PackageReference Include="Grace" Version="7.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />

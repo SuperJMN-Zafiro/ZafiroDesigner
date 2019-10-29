@@ -22,7 +22,7 @@
         </Border>
         <Border CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
                 BorderBrush="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
-                BorderThickness="{Binding StrokeWidth, Converter={StaticResource ThicknessConverter}}"
+                BorderThickness="{Binding StrokeThickness, Converter={StaticResource ThicknessConverter}}"
                 Background="{Binding TintedBackground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}" />
 
     </Grid>

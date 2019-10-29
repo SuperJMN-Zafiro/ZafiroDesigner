@@ -21,7 +21,7 @@ namespace Designer.Core.Tools
                 Background = Color.FromArgb(255, 255, 255, 255),
                 BackgroundTint = 1,
                 Stroke = Color.FromArgb(255, 0, 0, 0),
-                StrokeWidth = 1,                
+                StrokeThickness = 1,                
             };
 
             var creationResult = new CreationResult(graphic);

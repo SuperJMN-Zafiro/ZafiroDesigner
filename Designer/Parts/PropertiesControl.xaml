@@ -79,7 +79,7 @@
                     </DataTemplate>
                 </objEditor:Editor.Template>
                 <objEditor:Editor.Key>
-                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="StrokeWidth" />
+                    <objEditor:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="StrokeThickness" />
                 </objEditor:Editor.Key>
             </objEditor:Editor>
 
