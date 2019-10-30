@@ -8,46 +8,73 @@
     xmlns:designer="using:Zafiro.Uwp.Designer"
     xmlns:viewModels="using:Designer.Domain.ViewModels"
     xmlns:designer1="using:Designer"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:Line}">
 
-    <Canvas>
-        <Line Fill="{Binding Background, Converter={StaticResource ColorToBrushConverter}}"
-            X1="{Binding X1}" Y1="{Binding Y1}"
-            X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="{Binding StrokeThickness}"
-            Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}"
-            />
-        <designer1:BoundsDragDeltaControl1 Canvas.Left="{Binding X1}" Canvas.Top="{Binding Y1}"  Margin="-3,-3,0,0"
-                                      X1="{Binding X1, Mode=TwoWay}"
-                                      X2="{Binding X2, Mode=TwoWay}"
-                                      Left="{Binding Left, Mode=TwoWay}"
-                                      Width="{Binding Width, Mode=TwoWay}"
-                                      Y1="{Binding Y1, Mode=TwoWay}"
-                                      Y2="{Binding Y2, Mode=TwoWay}"
-                                      Top="{Binding Top, Mode=TwoWay}"
-                                      Height="{Binding Height, Mode=TwoWay}">
-            <Border Background="Red" Width="6" Height="6" />
-        </designer1:BoundsDragDeltaControl1>
+    <ContentControl>
+        <Canvas>
+            <Line Fill="{Binding Background, Converter={StaticResource ColorToBrushConverter}}"
+                  X1="{Binding X1}" Y1="{Binding Y1}"
+                  X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="{Binding StrokeThickness}"
+                  Stroke="{Binding Stroke, Converter={StaticResource ColorToBrushConverter}}" />
+            <designer1:BoundsDragDeltaControl1
+                x:Name="Point1"
+                Canvas.Left="{Binding X1}" Canvas.Top="{Binding Y1}" Margin="-3,-3,0,0"
+                X1="{Binding X1, Mode=TwoWay}"
+                X2="{Binding X2, Mode=TwoWay}"
+                Left="{Binding Left, Mode=TwoWay}"
+                Width="{Binding Width, Mode=TwoWay}"
+                Y1="{Binding Y1, Mode=TwoWay}"
+                Y2="{Binding Y2, Mode=TwoWay}"
+                Top="{Binding Top, Mode=TwoWay}"
+                Height="{Binding Height, Mode=TwoWay}"
+                Visibility="Collapsed">
+                <Border Background="Red" Width="6" Height="6" />
+            </designer1:BoundsDragDeltaControl1>
 
-        <designer1:BoundsDragDeltaControl2 Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}"  Margin="-3,-3,0,0"
-                                          X1="{Binding X1, Mode=TwoWay}"
-                                          X2="{Binding X2, Mode=TwoWay}"
-                                          Left="{Binding Left, Mode=TwoWay}"
-                                          Width="{Binding Width, Mode=TwoWay}"
-                                          Y1="{Binding Y1, Mode=TwoWay}"
-                                          Y2="{Binding Y2, Mode=TwoWay}"
-                                          Top="{Binding Top, Mode=TwoWay}"
-                                          Height="{Binding Height, Mode=TwoWay}">
-            <Border Background="Red" Width="6" Height="6" />
-        </designer1:BoundsDragDeltaControl2>
-        
+            <designer1:BoundsDragDeltaControl2
+                x:Name="Point2"
+                Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}" Margin="-3,-3,0,0"
+                X1="{Binding X1, Mode=TwoWay}"
+                X2="{Binding X2, Mode=TwoWay}"
+                Left="{Binding Left, Mode=TwoWay}"
+                Width="{Binding Width, Mode=TwoWay}"
+                Y1="{Binding Y1, Mode=TwoWay}"
+                Y2="{Binding Y2, Mode=TwoWay}"
+                Top="{Binding Top, Mode=TwoWay}"
+                Height="{Binding Height, Mode=TwoWay}"
+                Visibility="Collapsed">
+                <Border Background="Red" Width="6" Height="6" />
+            </designer1:BoundsDragDeltaControl2>
 
-        <!--<designer:DeltaContentControl Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}" 
+
+            <!--<designer:DeltaContentControl Canvas.Left="{Binding X2}" Canvas.Top="{Binding Y2}" 
                                       Horizontal="{Binding X2, Mode=TwoWay}"
                                       Vertical="{Binding Y2, Mode=TwoWay}" Margin="-3,-3,0,0">
             <Border Background="Red" Width="6" Height="6" />
         </designer:DeltaContentControl>-->
 
-    </Canvas>
+        </Canvas>
+
+
+        <interactivity:Interaction.Behaviors>
+            <core:EventTriggerBehavior EventName="GotFocus">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=Point1}" PropertyName="Visibility"
+                                           Value="Visible" />
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=Point2}" PropertyName="Visibility"
+                                           Value="Visible" />
+            </core:EventTriggerBehavior>
+            <core:EventTriggerBehavior EventName="LostFocus">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=Point1}" PropertyName="Visibility"
+                                           Value="Collapsed" />
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=Point2}" PropertyName="Visibility"
+                                           Value="Collapsed" />
+            </core:EventTriggerBehavior>
+
+        </interactivity:Interaction.Behaviors>
+
+    </ContentControl>
 </UserControl>

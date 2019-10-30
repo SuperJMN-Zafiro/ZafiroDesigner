@@ -103,6 +103,7 @@ namespace Designer.Core
         private IObservable<Domain.Models.Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {
             return filePicker.Pick("Load", loadExtensions)
+                .Where(file => file != null)
                 .SelectMany(file => LoadProject(file, projectStore));
         }
 
