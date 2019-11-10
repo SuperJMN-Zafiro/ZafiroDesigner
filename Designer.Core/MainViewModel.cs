@@ -17,6 +17,7 @@ namespace Designer.Core
         private readonly IProjectMapper mapper;
         private readonly IProjectStore projectStore;
         private bool isImportVisible;
+        private readonly ObservableAsPropertyHelper<ReactiveCommand<Unit, Unit>> align;
 
         public MainViewModel(IFilePicker filePicker, IProjectMapper mapper,
             IProjectStore projectStore, ImportExtensionsViewModel importViewModel)
@@ -61,8 +62,11 @@ namespace Designer.Core
 
             ShowImport = ReactiveCommand.Create(() => IsImportVisible = true);
             HideImport = ReactiveCommand.Create(() => IsImportVisible = false);
+            align = this.WhenAnyObservable(x => x.Project.SelectedDocument.AlignChanged).ToProperty(this, x => x.Align);
         }
 
+        public ReactiveCommand<Unit, Unit> Align => align.Value;
+        
         private static Domain.Models.Project CreateNewDocument()
         {
             return new Domain.Models.Project
@@ -99,7 +103,6 @@ namespace Designer.Core
 
         public ReactiveCommand<Unit, Domain.Models.Project> Load { get; }
 
-        
         private IObservable<Domain.Models.Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {
             return filePicker.Pick("Load", loadExtensions)

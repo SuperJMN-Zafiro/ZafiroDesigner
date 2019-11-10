@@ -10,7 +10,7 @@
     xmlns:items="using:Designer.Domain.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Project}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
 
     <UserControl.Resources>
         <converters:ValueConverterGroup x:Key="ToolTypeToImageConverter">

@@ -16,6 +16,7 @@
     xmlns:designer1="using:Designer"
     xmlns:items="using:Designer.Domain.ViewModels"
     xmlns:graphics="using:Designer.Parts.Graphics"
+    xmlns:parts="using:Designer.Parts"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
@@ -58,42 +59,87 @@
 
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition  />
-        </Grid.RowDefinitions>
+    <controls:DockPanel>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <parts:ToolsControl />
+            <CommandBar HorizontalAlignment="Right" controls:DockPanel.Dock="Top">
+                <AppBarButton Command="{Binding AlignToLeftCommand, ElementName=DesignerSurface}" Label="Align left">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF594;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToRightCommand, ElementName=DesignerSurface}" Label="Align right">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF595;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToTopCommand, ElementName=DesignerSurface}" Label="Align top">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF596;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToBottomCommand, ElementName=DesignerSurface}"
+                              Label="Align bottom">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF597;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </StackPanel>
 
-        <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
-            <controls:LayoutTransformControl.Transform>
-                <RotateTransform Angle="-90" />
-            </controls:LayoutTransformControl.Transform>
-            <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
-                <lw:Ruler.RenderTransform>
-                    <ScaleTransform ScaleX="-1" ScaleY="1" />
-                </lw:Ruler.RenderTransform>
-            </lw:Ruler>
-        </controls:LayoutTransformControl>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-        <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
-        <designer:DesignerSurface Grid.Column="1"
-                                  Grid.Row="1"
-                                  x:Name="DesignerSurface"
-                                  ItemsSource="{Binding Graphics}"
-                                  LeftBinding="{Binding Left, Mode=TwoWay}"
-                                  TopBinding="{Binding Top, Mode=TwoWay}"
-                                  HeightBinding="{Binding Height, Mode=TwoWay}"
-                                  WidthBinding="{Binding Width, Mode=TwoWay}"
-                                  AngleBinding="{Binding Angle, Mode=OneWay}"
-                                  ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
-                                  SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-        <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-    </Grid>
+            <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
+                <controls:LayoutTransformControl.Transform>
+                    <RotateTransform Angle="-90" />
+                </controls:LayoutTransformControl.Transform>
+                <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
+                    <lw:Ruler.RenderTransform>
+                        <ScaleTransform ScaleX="-1" ScaleY="1" />
+                    </lw:Ruler.RenderTransform>
+                </lw:Ruler>
+            </controls:LayoutTransformControl>
+
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <designer:DesignerSurface Grid.Column="1"
+                                      Grid.Row="1"
+                                      x:Name="DesignerSurface"
+                                      ItemsSource="{Binding Graphics}"
+                                      LeftBinding="{Binding Left, Mode=TwoWay}"
+                                      TopBinding="{Binding Top, Mode=TwoWay}"
+                                      HeightBinding="{Binding Height, Mode=TwoWay}"
+                                      WidthBinding="{Binding Width, Mode=TwoWay}"
+                                      AngleBinding="{Binding Angle, Mode=OneWay}"
+                                      ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
+                                      SelectedItems="{Binding SelectedItems, Mode=TwoWay}">
+                <designer:DesignerSurface.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Align to Left"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToLeftCommand}" />
+                        <MenuFlyoutItem Text="Align to Right"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToRightCommand}" />
+                        <MenuFlyoutItem Text="Align to Top"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToTopCommand}" />
+                        <MenuFlyoutItem Text="Align to Bottom"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToBottomCommand}" />
+                    </MenuFlyout>
+                </designer:DesignerSurface.ContextFlyout>
+            </designer:DesignerSurface>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </Grid>
+    </controls:DockPanel>
 </UserControl>
