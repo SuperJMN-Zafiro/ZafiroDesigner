@@ -8,12 +8,6 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:designer="using:Zafiro.Uwp.Designer"
     xmlns:sel="using:Designer.TemplateSelectors"
-    xmlns:conv="using:Designer.Converters"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
-    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:core="using:Designer.Core"
-    xmlns:designer1="using:Designer"
     xmlns:items="using:Designer.Domain.ViewModels"
     xmlns:graphics="using:Designer.Parts.Graphics"
     xmlns:parts="using:Designer.Parts"
@@ -23,7 +17,7 @@
 
     <UserControl.Resources>
 
-        <sel:TypeNameTemplateSelector x:Key="SuperTemplateSelector">
+        <sel:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector">
             <sel:TypeNameTemplateSelector.Items>
                 <ResourceDictionary>
                     <DataTemplate x:Key="Rectangle">
@@ -61,9 +55,13 @@
 
     <controls:DockPanel>
 
-        <StackPanel>
+        <Grid controls:DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <parts:ToolsControl />
-            <CommandBar HorizontalAlignment="Right" controls:DockPanel.Dock="Top">
+            <CommandBar Background="{ThemeResource AppBarBackgroundThemeBrush}" Grid.Column="1">
                 <AppBarButton Command="{Binding AlignToLeftCommand, ElementName=DesignerSurface}" Label="Align left">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xF594;" />
@@ -86,7 +84,7 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar>
-        </StackPanel>
+        </Grid>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -124,7 +122,7 @@
                                       HeightBinding="{Binding Height, Mode=TwoWay}"
                                       WidthBinding="{Binding Width, Mode=TwoWay}"
                                       AngleBinding="{Binding Angle, Mode=OneWay}"
-                                      ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
+                                      ItemTemplateSelector="{StaticResource TypeNameTemplateSelector}"
                                       SelectedItems="{Binding SelectedItems, Mode=TwoWay}">
                 <designer:DesignerSurface.ContextFlyout>
                     <MenuFlyout>

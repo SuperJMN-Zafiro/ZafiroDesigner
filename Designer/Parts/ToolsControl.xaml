@@ -32,6 +32,13 @@
 
     <Border>
         <ItemsControl ItemsSource="{Binding Tools}">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Command="{Binding CreateCommand}" Background="Transparent"
