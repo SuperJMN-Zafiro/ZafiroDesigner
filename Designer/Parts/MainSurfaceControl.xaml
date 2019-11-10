@@ -28,7 +28,7 @@
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
-            <local:ToolsControl VerticalAlignment="Center" Visibility="{Binding SelectedDocument, Converter={StaticResource NullToVisibilityConverter}}" />
+            <!--<local:ToolsControl VerticalAlignment="Center" Visibility="{Binding SelectedDocument, Converter={StaticResource NullToVisibilityConverter}}" />-->
 
             <controls:TabView Grid.Column="1" ItemsSource="{Binding Documents}"
                        SelectedItem="{Binding SelectedDocument, Mode=TwoWay}">
