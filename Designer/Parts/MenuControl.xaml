@@ -23,9 +23,9 @@
         <MenuBarItem Title="Object">
             <MenuFlyoutSubItem Text="Alignment">
                 <MenuFlyoutItem Text="Align to left" Command="{Binding DesignContext.DesignCommandsHost.AlignLeft}" />
-                <!--<MenuFlyoutItem Text="Align to right" Command="{Binding AlignCommands.AlignToRightCommand}" />
-                <MenuFlyoutItem Text="Align to top" Command="{Binding AlignCommands.AlignToTopCommand}" />
-                <MenuFlyoutItem Text="Align to bottom" Command="{Binding AlignCommands.AlignToBottomCommand}" />-->
+                <MenuFlyoutItem Text="Align to right" Command="{Binding DesignContext.DesignCommandsHost.AlignRight}" />
+                <MenuFlyoutItem Text="Align to top" Command="{Binding DesignContext.DesignCommandsHost.AlignTop}" />
+                <MenuFlyoutItem Text="Align to bottom" Command="{Binding DesignContext.DesignCommandsHost.AlignBottom}" />
             </MenuFlyoutSubItem>
             <!--<MenuFlyoutSubItem Text="Z-order">
                 <MenuFlyoutItem Text="Send to front" Command="{Binding ZOrderCommands.SendToFrontCommand}" />
