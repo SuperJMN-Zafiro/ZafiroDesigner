@@ -13,7 +13,7 @@ namespace Designer.Domain.ViewModels
         public Project(IViewModelFactory factory, IDesignContext context, IEnumerable<Tool> tools)
         {
             Tools = tools;
-
+            
             var selectedObjectObs = this.WhenAnyValue(x => x.SelectedDocument);
             selectedObjectObs.Subscribe(document =>
             {

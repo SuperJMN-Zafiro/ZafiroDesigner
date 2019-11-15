@@ -12,16 +12,17 @@ namespace Designer.Core
 {
     public class MainViewModel : ReactiveObject
     {
+        private readonly ObservableAsPropertyHelper<ReactiveCommand<Unit, Unit>> align;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
-        private readonly ObservableAsPropertyHelper<Project> project;
         private readonly IProjectMapper mapper;
+        private readonly ObservableAsPropertyHelper<Project> project;
         private readonly IProjectStore projectStore;
         private bool isImportVisible;
-        private readonly ObservableAsPropertyHelper<ReactiveCommand<Unit, Unit>> align;
 
         public MainViewModel(IFilePicker filePicker, IProjectMapper mapper,
-            IProjectStore projectStore, ImportExtensionsViewModel importViewModel)
+            IProjectStore projectStore, ImportExtensionsViewModel importViewModel, IDesignContext designContext)
         {
+            DesignContext = designContext;
             this.mapper = mapper;
             this.projectStore = projectStore;
 
@@ -65,21 +66,9 @@ namespace Designer.Core
             align = this.WhenAnyObservable(x => x.Project.SelectedDocument.AlignChanged).ToProperty(this, x => x.Align);
         }
 
+        public IDesignContext DesignContext { get; }
+
         public ReactiveCommand<Unit, Unit> Align => align.Value;
-        
-        private static Domain.Models.Project CreateNewDocument()
-        {
-            return new Domain.Models.Project
-            {
-                Documents = new List<Document>
-                {
-                    new Document
-                    {
-                        Name = "New document",
-                    }
-                }
-            };
-        }
 
         public ReactiveCommand<Unit, bool> ShowImport { get; }
 
@@ -102,6 +91,20 @@ namespace Designer.Core
         public ReactiveCommand<Unit, Domain.Models.Project> New { get; }
 
         public ReactiveCommand<Unit, Domain.Models.Project> Load { get; }
+
+        private static Domain.Models.Project CreateNewDocument()
+        {
+            return new Domain.Models.Project
+            {
+                Documents = new List<Document>
+                {
+                    new Document
+                    {
+                        Name = "New document"
+                    }
+                }
+            };
+        }
 
         private IObservable<Domain.Models.Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {

@@ -148,6 +148,7 @@
     <Compile Include="Extensions\AppServiceExtensions.cs" />
     <Compile Include="Extensions\ServiceException.cs" />
     <Compile Include="Extensions\WindowsAppService.cs" />
+    <Compile Include="Parts\DesignCommandsHost.cs" />
     <Compile Include="Parts\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>

@@ -20,6 +20,18 @@
             <MenuFlyoutSeparator  />
             <MenuFlyoutItem Text="Save" Command="{Binding Save}" />
         </MenuBarItem>
+        <MenuBarItem Title="Object">
+            <MenuFlyoutSubItem Text="Alignment">
+                <MenuFlyoutItem Text="Align to left" Command="{Binding DesignContext.DesignCommandsHost.AlignLeft}" />
+                <!--<MenuFlyoutItem Text="Align to right" Command="{Binding AlignCommands.AlignToRightCommand}" />
+                <MenuFlyoutItem Text="Align to top" Command="{Binding AlignCommands.AlignToTopCommand}" />
+                <MenuFlyoutItem Text="Align to bottom" Command="{Binding AlignCommands.AlignToBottomCommand}" />-->
+            </MenuFlyoutSubItem>
+            <!--<MenuFlyoutSubItem Text="Z-order">
+                <MenuFlyoutItem Text="Send to front" Command="{Binding ZOrderCommands.SendToFrontCommand}" />
+                <MenuFlyoutItem Text="Send to back" Command="{Binding ZOrderCommands.SendToBackCommand}" />
+            </MenuFlyoutSubItem>-->
+        </MenuBarItem>
     </MenuBar>
 </UserControl>
 

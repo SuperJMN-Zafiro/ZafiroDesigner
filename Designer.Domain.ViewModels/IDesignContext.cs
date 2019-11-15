@@ -6,5 +6,6 @@ namespace Designer.Domain.ViewModels
     {
         ICollection<Graphic> Nodes { get; set; }
         ICollection<Graphic> Selection { get; set; }
+        IDesignCommandsHost DesignCommandsHost { get; set; }
     }
 }

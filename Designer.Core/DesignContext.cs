@@ -9,6 +9,12 @@ namespace Designer.Core
     {
         private ICollection<Graphic> nodes;
         private ICollection<Graphic> selection;
+        private IDesignCommandsHost designCommandsHost;
+
+        public DesignContext()
+        {
+            MessageBus.Current.Listen<CommandsHostChanged>().Subscribe(message => DesignCommandsHost = message.CommandsHost);
+        }
 
         public ICollection<Graphic> Nodes
         {
@@ -22,6 +28,12 @@ namespace Designer.Core
             set => this.RaiseAndSetIfChanged(ref selection, value);
         }
 
+        public IDesignCommandsHost DesignCommandsHost
+        {
+            get => designCommandsHost;
+            set => this.RaiseAndSetIfChanged(ref designCommandsHost, value);
+        }
+        
         public IObservable<bool> SelectionObs { get; set; }
     }
 }
