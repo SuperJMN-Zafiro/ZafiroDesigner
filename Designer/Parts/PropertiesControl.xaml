@@ -9,6 +9,7 @@
     xmlns:objEditor="using:Zafiro.Uwp.Controls.ObjEditor"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:items="using:Designer.Domain.ViewModels"
+    xmlns:defaultEditors="using:Zafiro.Uwp.Controls.ObjEditor.DefaultEditors"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Project}">
@@ -20,6 +21,16 @@
 
     <objEditor:ObjectEditor SelectedItems="{Binding SelectedDocument.SelectedItems}" Margin="4">
         <objEditor:ObjectEditor.Editors>
+            <objEditor:Editor>
+                <objEditor:Editor.Template>
+                    <DataTemplate x:DataType="objEditor:PropertyItem">
+                        <defaultEditors:EnumEditor Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </objEditor:Editor.Template>
+                <objEditor:Editor.Key>
+                    <objEditor:EditorKey TargetTypeString="System.Enum, mscorlib" />
+                </objEditor:Editor.Key>
+            </objEditor:Editor>
             <objEditor:Editor>
                 <objEditor:Editor.Template>
                     <DataTemplate x:DataType="objEditor:PropertyItem">
