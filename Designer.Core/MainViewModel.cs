@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Designer.Domain.ViewModels;
 using ReactiveUI;
 using Zafiro.Core;
+using Zafiro.Core.Files;
 using Document = Designer.Domain.Models.Document;
 
 namespace Designer.Core

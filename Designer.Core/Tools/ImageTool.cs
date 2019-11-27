@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Designer.Domain.Models;
 using Designer.Domain.ViewModels;
 using Zafiro.Core;
+using Zafiro.Core.Files;
+using Zafiro.Core.Mixins;
 using Image = Designer.Domain.ViewModels.Image;
 
 namespace Designer.Core.Tools

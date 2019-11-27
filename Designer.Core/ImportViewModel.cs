@@ -8,6 +8,8 @@ using Designer.Domain.Models;
 using Newtonsoft.Json;
 using ReactiveUI;
 using Zafiro.Core;
+using Zafiro.Core.Files;
+using Zafiro.Core.Mixins;
 
 namespace Designer.Core
 {

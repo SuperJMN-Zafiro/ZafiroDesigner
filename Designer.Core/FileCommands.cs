@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
 using Zafiro.Core;
+using Zafiro.Core.Files;
 
 namespace Designer.Core
 {

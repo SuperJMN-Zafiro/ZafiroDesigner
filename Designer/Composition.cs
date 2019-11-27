@@ -6,6 +6,7 @@ using Designer.Domain.ViewModels;
 using Designer.Extensions;
 using Grace.DependencyInjection;
 using Zafiro.Core;
+using Zafiro.Core.Files;
 using Zafiro.Uwp.Controls;
 
 namespace Designer

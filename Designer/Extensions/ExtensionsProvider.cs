@@ -11,25 +11,23 @@ using Designer.Core;
 using DynamicData;
 using ReactiveUI;
 using Zafiro.Core;
+using Zafiro.Core.Files;
+using Zafiro.Core.Mixins;
+using DisposableMixins = System.Reactive.Disposables.DisposableMixins;
 
 namespace Designer.Extensions
 {
     public class ExtensionsProvider : ReactiveObject, IExtensionsProvider
     {
-        private readonly IServiceFactory factory;
-        private readonly IFilePicker picker;
         private readonly CompositeDisposable refreshers = new CompositeDisposable();
         private readonly CompositeDisposable disposables = new CompositeDisposable();
 
         private ReadOnlyObservableCollection<ImportViewModel> extensions;
-        private readonly IObservable<IChangeSet<ImportViewModel, string>> observableChangeset;
 
-        public IObservable<IChangeSet<ImportViewModel, string>> ObservableChangeset => observableChangeset;
+        public IObservable<IChangeSet<ImportViewModel, string>> ObservableChangeset { get; }
 
         public ExtensionsProvider(string contract, IServiceFactory factory, IFilePicker picker)
         {
-            this.factory = factory;
-            this.picker = picker;
             var catalog = AppExtensionCatalog.Open(contract);
             var source = new SourceCache<AppExtension, string>(a => a.Id);
 
@@ -45,15 +43,13 @@ namespace Designer.Extensions
 
                     refreshers.Dispose();
 
-                    Observable
-                        .FromEventPattern<AppExtensionPackageInstalledEventArgs>(catalog, "PackageInstalled")
-                        .Subscribe(args => x.AddOrUpdate(args.EventArgs.Extensions))
-                        .DisposeWith(refreshers);
+                    DisposableMixins.DisposeWith(Observable
+                            .FromEventPattern<AppExtensionPackageInstalledEventArgs>(catalog, "PackageInstalled")
+                            .Subscribe(args => x.AddOrUpdate(args.EventArgs.Extensions)), refreshers);
 
-                    Observable
-                        .FromEventPattern<AppExtensionPackageUninstallingEventArgs>(catalog, "PackageUninstalling")
-                        .Subscribe(args => { })
-                        .DisposeWith(refreshers);
+                    DisposableMixins.DisposeWith(Observable
+                            .FromEventPattern<AppExtensionPackageUninstallingEventArgs>(catalog, "PackageUninstalling")
+                            .Subscribe(args => { }), refreshers);
 
                 });
                 return Unit.Default;
@@ -65,7 +61,7 @@ namespace Designer.Extensions
                 {
                     var open = await appExtension.AppInfo.DisplayInfo.GetLogo(new Size(1, 1)).OpenReadAsync();
                     var stream = open.AsStreamForRead();
-                    return await stream.ReadBytes();
+                    return await StreamMixin.ReadBytes(stream);
                 };
             }
 
@@ -78,18 +74,16 @@ namespace Designer.Extensions
                 };
             }
 
-            observableChangeset = source
+            ObservableChangeset = source
                 .Connect()
                 .Transform(ext => new ImportViewModel(ext.DisplayName, ext.Description, GetLogo(ext), GetService(ext), picker));
 
-            observableChangeset
-                .Bind(out extensions)
-                .Subscribe()
-                .DisposeWith(disposables);
+            DisposableMixins.DisposeWith(ObservableChangeset
+                    .Bind(out extensions)
+                    .Subscribe(), disposables);
 
-            Connect.Execute()
-                .Subscribe()
-                .DisposeWith(disposables);
+            DisposableMixins.DisposeWith(Connect.Execute()
+                    .Subscribe(), disposables);
         }
 
         public ReactiveCommand<Unit, Unit> Connect { get; set; }
