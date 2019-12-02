@@ -12,6 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj" />
     <ProjectReference Include="..\Designer.Domain.ViewModels\Designer.Domain.ViewModels.csproj" />
-    <ProjectReference Include="..\Zafiro\Zafiro.Core\Zafiro.Core.csproj" />
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj" />
   </ItemGroup>
 </Project>
