@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lw="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:designer="using:Zafiro.Uwp.Designer"
     xmlns:sel="using:Designer.TemplateSelectors"
     xmlns:items="using:Designer.Domain.ViewModels"
     xmlns:graphics="using:Designer.Parts.Graphics"
     xmlns:parts="using:Designer.Parts"
+    xmlns:lightweight="using:Zafiro.Uwp.Lightweight"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
@@ -97,19 +97,19 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0"
+            <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
             <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
                 <controls:LayoutTransformControl.Transform>
                     <RotateTransform Angle="-90" />
                 </controls:LayoutTransformControl.Transform>
-                <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch"
+                <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
-                    <lw:Ruler.RenderTransform>
+                    <lightweight:Ruler.RenderTransform>
                         <ScaleTransform ScaleX="-1" ScaleY="1" />
-                    </lw:Ruler.RenderTransform>
-                </lw:Ruler>
+                    </lightweight:Ruler.RenderTransform>
+                </lightweight:Ruler>
             </controls:LayoutTransformControl>
 
             <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->

@@ -7,7 +7,7 @@ using Designer.Extensions;
 using Grace.DependencyInjection;
 using Zafiro.Core;
 using Zafiro.Core.Files;
-using Zafiro.Uwp.Controls;
+using Zafiro.Uwp;
 
 namespace Designer
 {
