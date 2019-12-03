@@ -17,8 +17,8 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock x:Name="TextBlock">Hello</TextBlock>
-        <objectEditor1:UwpObjectEditor Grid.Column="1" SelectedItems="{Binding ElementName=TextBlock}">
-            <objectEditor1:UwpObjectEditor.Editors>
+        <objectEditor1:ObjectEditor Grid.Column="1" SelectedItems="{Binding ElementName=TextBlock}">
+            <objectEditor1:ObjectEditor.Editors>
                 <objectEditor1:Editor>
                     <objectEditor1:Editor.Template>
                         <DataTemplate></DataTemplate>
@@ -28,13 +28,13 @@
                     </objectEditor1:Editor.Key>
                     
                 </objectEditor1:Editor>
-            </objectEditor1:UwpObjectEditor.Editors>
-            <objectEditor1:UwpObjectEditor.DefaultEditorTemplate>
+            </objectEditor1:ObjectEditor.Editors>
+            <objectEditor1:ObjectEditor.DefaultEditorTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Value}" />
                 </DataTemplate>
-            </objectEditor1:UwpObjectEditor.DefaultEditorTemplate>
-        </objectEditor1:UwpObjectEditor>
+            </objectEditor1:ObjectEditor.DefaultEditorTemplate>
+        </objectEditor1:ObjectEditor>
 
     </Grid>
 </Page>

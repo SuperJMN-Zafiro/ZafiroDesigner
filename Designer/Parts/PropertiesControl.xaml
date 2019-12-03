@@ -20,13 +20,13 @@
         <converters:ColorConverter x:Key="ColorConverter" />
     </UserControl.Resources>
 
-    <oe:UwpObjectEditor SelectedItems="{Binding SelectedDocument.SelectedItems}" Margin="4">
-        <oe:UwpObjectEditor.DefaultEditorTemplate>
+    <oe:ObjectEditor SelectedItems="{Binding SelectedDocument.SelectedItems}" Margin="4">
+        <oe:ObjectEditor.DefaultEditorTemplate>
             <DataTemplate>
                 <TextBox Text="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
-        </oe:UwpObjectEditor.DefaultEditorTemplate>
-        <oe:UwpObjectEditor.Editors>
+        </oe:ObjectEditor.DefaultEditorTemplate>
+        <oe:ObjectEditor.Editors>
             <oe:Editor>
                 <oe:Editor.Template>
                     <DataTemplate x:DataType="oe:PropertyItem">
@@ -134,6 +134,6 @@
                 </oe:Editor.Key>
             </oe:Editor>
 
-        </oe:UwpObjectEditor.Editors>
-    </oe:UwpObjectEditor>
+        </oe:ObjectEditor.Editors>
+    </oe:ObjectEditor>
 </UserControl>
