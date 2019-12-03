@@ -363,16 +363,16 @@
       <Project>{D74A11DB-4403-4C74-9F1C-260C4695138C}</Project>
       <Name>Designer.Domain.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Core\Zafiro.Core.csproj">
-      <Project>{BBD924F6-514B-40C4-AD3A-F6265FE49717}</Project>
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj">
+      <Project>{e977c6c6-1089-4687-a774-a2e6d77c4c3d}</Project>
       <Name>Zafiro.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Uwp.Designer\Zafiro.Uwp.Designer.csproj">
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp.Designer\Zafiro.Uwp.Designer.csproj">
       <Project>{a8d0162a-4a08-40b0-91d5-e5290c1e8a0d}</Project>
       <Name>Zafiro.Uwp.Designer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Uwp\Zafiro.Uwp.csproj">
-      <Project>{889D7132-88F9-4254-9640-1E38ED419184}</Project>
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp\Zafiro.Uwp.csproj">
+      <Project>{889d7132-88f9-4254-9640-1e38ed419184}</Project>
       <Name>Zafiro.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
