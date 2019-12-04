@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:objectEditor="using:Zafiro.Core.ObjectEditor"
+    xmlns:objectEditor1="using:Zafiro.Uwp.ObjectEditor"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="TextBlock">Hello</TextBlock>
+        <objectEditor1:ObjectEditor Grid.Column="1" SelectedItems="{Binding ElementName=TextBlock}">
+            <objectEditor1:ObjectEditor.Editors>
+                <objectEditor1:Editor>
+                    <objectEditor1:Editor.Template>
+                        <DataTemplate></DataTemplate>
+                    </objectEditor1:Editor.Template>
+                    <objectEditor1:Editor.Key>
+                        <objectEditor:EditorKey></objectEditor:EditorKey>
+                    </objectEditor1:Editor.Key>
+                    
+                </objectEditor1:Editor>
+            </objectEditor1:ObjectEditor.Editors>
+            <objectEditor1:ObjectEditor.DefaultEditorTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Value}" />
+                </DataTemplate>
+            </objectEditor1:ObjectEditor.DefaultEditorTemplate>
+        </objectEditor1:ObjectEditor>
+
+    </Grid>
+</Page>

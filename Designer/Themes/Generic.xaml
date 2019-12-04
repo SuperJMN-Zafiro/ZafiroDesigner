@@ -1,8 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Designer"
-    xmlns:designer="using:Zafiro.Uwp.Designer">
+    xmlns:local="using:Designer">
 
     <Style TargetType="local:BoundsDragDeltaControl1" >
         <Setter Property="Template">

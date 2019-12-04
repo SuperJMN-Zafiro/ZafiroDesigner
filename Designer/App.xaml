@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vconvs="using:Designer.Converters"
     xmlns:convs="using:ValueConverters"
-    xmlns:zconvs="using:Zafiro.Uwp.Controls.Converters"
+    xmlns:converters="using:Zafiro.Uwp.Converters"
     RequestedTheme="Light">
 
 
@@ -30,7 +30,7 @@
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
 
-            <zconvs:ByteArrayToImageConverter x:Key="ImageConverter" />
+            <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
 
             <vconvs:ValueConverterGroup x:Key="NullToVisibilityConverter" >
                 <convs:NullToBoolConverter IsInverted="True"></convs:NullToBoolConverter>

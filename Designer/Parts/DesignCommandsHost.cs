@@ -1,7 +1,7 @@
 ﻿using System.Reactive;
 using Designer.Domain.ViewModels;
 using ReactiveUI;
-using Zafiro.Uwp.Designer;
+using Zafiro.Uwp.Design;
 
 namespace Designer.Parts
 {
