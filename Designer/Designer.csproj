@@ -367,9 +367,9 @@
       <Project>{e977c6c6-1089-4687-a774-a2e6d77c4c3d}</Project>
       <Name>Zafiro.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp.Designer\Zafiro.Uwp.Designer.csproj">
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp.Design\Zafiro.Uwp.Design.csproj">
       <Project>{a8d0162a-4a08-40b0-91d5-e5290c1e8a0d}</Project>
-      <Name>Zafiro.Uwp.Designer</Name>
+      <Name>Zafiro.Uwp.Design</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp\Zafiro.Uwp.csproj">
       <Project>{889d7132-88f9-4254-9640-1e38ed419184}</Project>

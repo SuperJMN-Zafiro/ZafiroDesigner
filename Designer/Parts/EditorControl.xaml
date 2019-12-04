@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:designer="using:Zafiro.Uwp.Designer"
+    xmlns:designer="using:Zafiro.Uwp.Design"
     xmlns:sel="using:Designer.TemplateSelectors"
     xmlns:items="using:Designer.Domain.ViewModels"
     xmlns:graphics="using:Designer.Parts.Graphics"
