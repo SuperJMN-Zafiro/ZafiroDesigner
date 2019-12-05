@@ -1,3 +1,4 @@
+using Designer.Domain.Models;
 using ReactiveUI;
 
 namespace Designer.Domain.ViewModels
@@ -32,5 +33,8 @@ namespace Designer.Domain.ViewModels
             get { return y2; }
             set { this.RaiseAndSetIfChanged(ref y2, value); }
         }
+
+        public Point StartPoint => new Point(X1, Y1);
+        public Point EndPoint => new Point(X2, Y2);
     }
 }

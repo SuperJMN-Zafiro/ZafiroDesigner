@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ namespace Designer.Core
 
             project = projects
                 .Select(mapper.Map)
+                .Do(x => x.SelectedDocument = x.Documents.FirstOrDefault())
                 .ToProperty(this, model => model.Project);
 
             isBusy = Load.IsExecuting
