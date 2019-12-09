@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Designer.Domain.Models;
+using ExtendedXmlSerializer;
 using ExtendedXmlSerializer.Configuration;
-using ExtendedXmlSerializer.ExtensionModel.Content;
-using ExtendedXmlSerializer.ExtensionModel.Xml;
 
 namespace Designer.Core.Persistence
 {
@@ -17,7 +16,7 @@ namespace Designer.Core.Persistence
                 .UseAutoFormatting()
                 .UseOptimizedNamespaces()
                 .EnableParameterizedContent()
-                .Register(ColorConverter.Default)
+                .Type<Color>().Register().Converter().Using(ColorConverter.Default)
                 .Create();
         }
 
