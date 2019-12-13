@@ -350,32 +350,31 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Designer.Core\Designer.Core.csproj">
-      <Project>{a1b7d9d0-a52b-477e-8791-6fbccf1abae8}</Project>
+    <ProjectReference Include="..\ZafiroDesigner.Core\Designer.Core\Designer.Core.csproj">
+      <Project>{d597364c-51d0-4030-b204-381e1c803957}</Project>
       <Name>Designer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj">
-      <Project>{b86fc71e-e88c-4e03-8510-49f40075f0fd}</Project>
+    <ProjectReference Include="..\ZafiroDesigner.Core\Designer.Domain.Models\Designer.Domain.Models.csproj">
+      <Project>{0f7e42a6-31d2-42d7-b5f3-3029b7bdc1fd}</Project>
       <Name>Designer.Domain.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Designer.Domain.ViewModels\Designer.Domain.ViewModels.csproj">
-      <Project>{D74A11DB-4403-4C74-9F1C-260C4695138C}</Project>
+    <ProjectReference Include="..\ZafiroDesigner.Core\Designer.Domain.ViewModels\Designer.Domain.ViewModels.csproj">
+      <Project>{f437e380-1cca-467c-9d93-1c7b53ee5e50}</Project>
       <Name>Designer.Domain.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj">
-      <Project>{e977c6c6-1089-4687-a774-a2e6d77c4c3d}</Project>
+    <ProjectReference Include="..\ZafiroDesigner.Core\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj">
+      <Project>{51224044-1387-4014-b579-e4bbcda54dcb}</Project>
       <Name>Zafiro.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp.Design\Zafiro.Uwp.Design.csproj">
+    <ProjectReference Include="..\ZafiroDesigner.Core\Zafiro\Source\Zafiro.Uwp.Design\Zafiro.Uwp.Design.csproj">
       <Project>{a8d0162a-4a08-40b0-91d5-e5290c1e8a0d}</Project>
       <Name>Zafiro.Uwp.Design</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp\Zafiro.Uwp.csproj">
+    <ProjectReference Include="..\ZafiroDesigner.Core\Zafiro\Source\Zafiro.Uwp\Zafiro.Uwp.csproj">
       <Project>{889d7132-88f9-4254-9640-1e38ed419184}</Project>
       <Name>Zafiro.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

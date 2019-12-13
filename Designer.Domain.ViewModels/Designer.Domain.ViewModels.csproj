@@ -8,9 +8,4 @@
     <PackageReference Include="ReactiveUI" Version="11.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj" />
-    <ProjectReference Include="..\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj" />
-  </ItemGroup>
-
 </Project>
