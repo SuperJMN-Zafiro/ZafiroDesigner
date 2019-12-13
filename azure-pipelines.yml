@@ -10,9 +10,9 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'Suppa Designer.sln'
+  solution: '*.sln'
   buildPlatform: 'x86|x64|ARM'
-  buildConfiguration: 'Debug'
+  buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
 steps:
@@ -29,3 +29,4 @@ steps:
     platform: 'x86'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload' /p:AppxPackageSigningEnabled=false
