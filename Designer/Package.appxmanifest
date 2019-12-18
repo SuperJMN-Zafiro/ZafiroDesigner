@@ -2,10 +2,10 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
          xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="7172SuperJMN.SuppaDesigner" Publisher="CN=2F5DAE27-0DBB-414B-95A3-624160BB76D3" Version="1.0.12.0" />
-  <mp:PhoneIdentity PhoneProductId="1db6b1ac-c541-4f2e-a227-b398a19ec154" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="7172SuperJMN.ZafiroDesigner" Publisher="CN=2F5DAE27-0DBB-414B-95A3-624160BB76D3" Version="1.0.15.0" />
+  <mp:PhoneIdentity PhoneProductId="f1829050-fac3-4a5c-9dd1-ec89a37c7874" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Suppa Designer</DisplayName>
+    <DisplayName>Zafiro Designer</DisplayName>
     <PublisherDisplayName>SuperJMN</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -17,7 +17,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Designer.App">
-      <uap:VisualElements DisplayName="Suppa Designer" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Designer UWP" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Zafiro Designer" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Zafiro Designer for Windows 10" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

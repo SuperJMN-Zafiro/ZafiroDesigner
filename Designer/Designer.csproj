@@ -24,12 +24,12 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>
-    </PackageCertificateThumbprint>
+    <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>A092333C1EA8DB13FF5D9A5C8B55E9E81613170D</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <Use64Bitcompiler>true</Use64Bitcompiler>
+    <ShortcutGenericAnalysis>true</ShortcutGenericAnalysis>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
@@ -253,6 +253,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
