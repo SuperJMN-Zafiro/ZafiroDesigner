@@ -5,7 +5,7 @@ using Designer.Domain.Models;
 
 namespace Designer.Converters
 {
-    public static class MyConverter
+    public static class Conversion
     {
         public static double PolarToCartesianX(double angle, double distance)
         {

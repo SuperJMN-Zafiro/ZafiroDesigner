@@ -5,19 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls1="using:Coding4Fun.Toolkit.Controls"
-    xmlns:converters="using:Designer.Converters"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:items="using:Designer.Domain.ViewModels"
-    xmlns:coe="using:Zafiro.Core.ObjectEditor"
     xmlns:oe="using:Zafiro.Uwp.ObjectEditor"
-    xmlns:de="using:Zafiro.Uwp.ObjectEditor.DefaultEditors"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Project}">
 
     <UserControl.Resources>
-        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-        <converters:ColorConverter x:Key="ColorConverter" />
+        
     </UserControl.Resources>
 
     <oe:ObjectEditor SelectedItems="{Binding SelectedDocument.SelectedItems}" Margin="4">
@@ -26,19 +22,23 @@
                 <TextBox Text="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
         </oe:ObjectEditor.DefaultEditorTemplate>
-        <oe:ObjectEditor.Editors>
-            <oe:Editor>
-                <oe:Editor.Template>
+        <oe:ObjectEditor.EditorDefinitions>
+            <oe:EditorDefinition Key="System.Double, mscorlib|CornerRadius,Distance,StrokeThickness">
+                <oe:EditorDefinition.Template>
                     <DataTemplate x:DataType="oe:PropertyItem">
-                        <de:EnumEditor Value="{Binding Value, Mode=TwoWay}" />
+                        <Slider Value="{Binding Value, Mode=TwoWay}" />
                     </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Enum, mscorlib" />
-                </oe:Editor.Key>
-            </oe:Editor>
-            <oe:Editor>
-                <oe:Editor.Template>
+                </oe:EditorDefinition.Template>
+            </oe:EditorDefinition>
+            <oe:EditorDefinition Key="System.Double, mscorlib|BackgroundTint">
+                <oe:EditorDefinition.Template>
+                    <DataTemplate x:DataType="oe:PropertyItem">
+                        <Slider Maximum="1" ThumbToolTipValueConverter="{StaticResource PercentageConverter}" StepFrequency="0.05" Minimum="0" Value="{Binding Value, Mode=TwoWay}" />
+                    </DataTemplate>
+                </oe:EditorDefinition.Template>
+            </oe:EditorDefinition>
+            <oe:EditorDefinition Key="Designer.Domain.Models.Color, Designer.Domain.Models|">
+                <oe:EditorDefinition.Template>
                     <DataTemplate x:DataType="oe:PropertyItem">
                         <Grid>
                             <Button BorderThickness="1" BorderBrush="Black" VerticalAlignment="Stretch" Height="32" HorizontalAlignment="Stretch" Background="{Binding Value, Converter={StaticResource ColorToBrushConverter}}">
@@ -50,69 +50,12 @@
                             </Button>
                         </Grid>
                     </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="Designer.Domain.Models.Color, Designer.Domain.Models"  />
-                </oe:Editor.Key>
-            </oe:Editor>
-            <oe:Editor>
-                <oe:Editor.Template>
-                    <DataTemplate x:DataType="oe:PropertyItem">
-                        <StackPanel>
-                            <TextBox Text="{Binding Value, Mode=TwoWay}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.String, mscorlib" PropertyName="Text" />
-                </oe:Editor.Key>
-            </oe:Editor>
-            <oe:Editor>
-                <oe:Editor.Template>
-                    <DataTemplate x:DataType="oe:PropertyItem">
-                        <Slider Value="{Binding Value, Mode=TwoWay}" />
-                    </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="CornerRadius" />
-                </oe:Editor.Key>
-            </oe:Editor>
+                </oe:EditorDefinition.Template>
+            </oe:EditorDefinition>
 
-            <oe:Editor>
-                <oe:Editor.Template>
-                    <DataTemplate x:DataType="oe:PropertyItem">
-                        <Slider Value="{Binding Value, Mode=TwoWay}" />
-                    </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="Distance" />
-                </oe:Editor.Key>
-            </oe:Editor>
+            <oe:EditorDefinition Key="System.Double, mscorlib|Angle">
 
-            <oe:Editor>
-                <oe:Editor.Template>
-                    <DataTemplate x:DataType="oe:PropertyItem">
-                        <Slider Value="{Binding Value, Mode=TwoWay}" />
-                    </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="StrokeThickness" />
-                </oe:Editor.Key>
-            </oe:Editor>
-
-            <oe:Editor>
-                <oe:Editor.Template>
-                    <DataTemplate x:DataType="oe:PropertyItem">
-                        <Slider Minimum="0" Maximum="1" StepFrequency="0.1" LargeChange="0.2" TickFrequency="0.1" Value="{Binding Value, Mode=TwoWay}" />
-                    </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="BackgroundTint" />
-                </oe:Editor.Key>
-            </oe:Editor>
-
-            <oe:Editor>
-                <oe:Editor.Template>
+                <oe:EditorDefinition.Template>
                     <DataTemplate x:DataType="oe:PropertyItem">
                         <controls:RadialGauge MaxAngle="360" Maximum="360" IsInteractive="True" Value="{Binding Value, Mode=TwoWay}"
                                               Minimum="0"
@@ -128,12 +71,11 @@
                                               ScalePadding="48"
                                               ScaleTickWidth="2" MaxHeight="120"/>
                     </DataTemplate>
-                </oe:Editor.Template>
-                <oe:Editor.Key>
-                    <coe:EditorKey TargetTypeString="System.Double, mscorlib" PropertyName="Angle" />
-                </oe:Editor.Key>
-            </oe:Editor>
+                </oe:EditorDefinition.Template>
+                
+            </oe:EditorDefinition>
 
-        </oe:ObjectEditor.Editors>
+        </oe:ObjectEditor.EditorDefinitions>
+        
     </oe:ObjectEditor>
 </UserControl>

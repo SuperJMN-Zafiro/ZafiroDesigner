@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
          xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="7172SuperJMN.ZafiroDesigner" Publisher="CN=2F5DAE27-0DBB-414B-95A3-624160BB76D3" Version="1.0.15.0" />
+  <Identity Name="SuperJMN.ZafiroDesigner" Publisher="CN=2F5DAE27-0DBB-414B-95A3-624160BB76D3" Version="1.0.15.0" />
   <mp:PhoneIdentity PhoneProductId="f1829050-fac3-4a5c-9dd1-ec89a37c7874" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Zafiro Designer</DisplayName>

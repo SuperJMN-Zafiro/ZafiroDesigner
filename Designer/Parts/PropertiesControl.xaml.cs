@@ -6,7 +6,7 @@ namespace Designer.Parts
     {
         public PropertiesControl()
         {
-            this.InitializeComponent();
+             this.InitializeComponent();
         }
     }
 }

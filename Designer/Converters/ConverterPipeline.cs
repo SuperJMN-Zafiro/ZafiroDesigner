@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Designer.Converters
 {
-    public class ValueConverterGroup : List<IValueConverter>, IValueConverter
+    public class ConverterPipeline : List<IValueConverter>, IValueConverter
     {
         #region IValueConverter Members
 

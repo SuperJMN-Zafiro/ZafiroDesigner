@@ -7,7 +7,7 @@ namespace Designer.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return MyConverter.DistanceToVisibility((double) value);
+            return Conversion.DistanceToVisibility((double) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

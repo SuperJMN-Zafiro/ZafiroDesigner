@@ -14,7 +14,7 @@ namespace Designer.Converters
             }
 
             var c = (Color) value;
-            return  Windows.UI.Color.FromArgb(c.A, c.R, c.G, c.B);
+            return Windows.UI.Color.FromArgb(c.A, c.R, c.G, c.B);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

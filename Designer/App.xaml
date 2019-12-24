@@ -16,36 +16,33 @@
         <ResourceDictionary>
 
             <ResourceDictionary.ThemeDictionaries>
-
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="ThumbBackgroundPointerOver" Color="#4C009BFF" />
                     <SolidColorBrush x:Key="ThumbBackgroundPressed" Color="#69009BFF" />
                 </ResourceDictionary>
-
             </ResourceDictionary.ThemeDictionaries>
 
+            <local:Composition x:Key="Composition" />
 
-            <vconvs:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
             <Style TargetType="TextBox">
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
 
-            <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
-
-            <vconvs:ValueConverterGroup x:Key="NullToVisibilityConverter" >
-                <convs:NullToBoolConverter IsInverted="True"></convs:NullToBoolConverter>
-                <convs:BoolToVisibilityConverter></convs:BoolToVisibilityConverter>
-            </vconvs:ValueConverterGroup>
-
+            <vconvs:ConverterPipeline x:Key="NullToVisibilityConverter" >
+                <convs:NullToBoolConverter IsInverted="True" />
+                <convs:BoolToVisibilityConverter />
+            </vconvs:ConverterPipeline>
+            <vconvs:WindowsColorToBrushConverter x:Key="WindowsColorToBrushConverter" />
             <convs:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <vconvs:ColorToBrushConverter x:Key="ColorToBrushConverter" />
             <vconvs:ThicknessConverter x:Key="ThicknessConverter" />
             <vconvs:CornerRadiusConverter x:Key="CornerRadiusConverter" />
             <local:ChangeSignConverter x:Key="VerticalOffsetConverter" />
             <vconvs:ZeroToCollapsedConverter x:Key="ZeroToCollapsedConverter" />
-
-            <local:Composition x:Key="Composition" />
             <vconvs:DoubleToCornerRadiusConverter x:Key="DoubleToCornerRadiusConverter" />
+            <local:PercentageConverter x:Key="PercentageConverter" />
+            <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
+            <vconvs:ColorConverter x:Key="ColorConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

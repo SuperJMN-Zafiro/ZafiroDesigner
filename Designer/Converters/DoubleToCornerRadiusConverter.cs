@@ -7,7 +7,7 @@ namespace Designer.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return MyConverter.DoubleToCornerRadius((double) value);
+            return Conversion.DoubleToCornerRadius((double) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
