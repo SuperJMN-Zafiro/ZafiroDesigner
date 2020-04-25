@@ -59,9 +59,16 @@ namespace Designer.Extensions
             {
                 return async () =>
                 {
-                    var open = await appExtension.AppInfo.DisplayInfo.GetLogo(new Size(1, 1)).OpenReadAsync();
-                    var stream = open.AsStreamForRead();
-                    return await StreamMixin.ReadBytes(stream);
+                    try
+                    {
+                        var open = await appExtension.AppInfo.DisplayInfo.GetLogo(new Size(1, 1)).OpenReadAsync();
+                        var stream = open.AsStreamForRead();
+                        return await StreamMixin.ReadBytes(stream);
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
                 };
             }
 

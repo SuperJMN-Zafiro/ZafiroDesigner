@@ -40,7 +40,7 @@
             <local:ChangeSignConverter x:Key="VerticalOffsetConverter" />
             <vconvs:ZeroToCollapsedConverter x:Key="ZeroToCollapsedConverter" />
             <vconvs:DoubleToCornerRadiusConverter x:Key="DoubleToCornerRadiusConverter" />
-            <local:PercentageConverter x:Key="PercentageConverter" />
+            <vconvs:PercentageConverter x:Key="PercentageConverter" />
             <converters:ByteArrayToImageConverter x:Key="ImageConverter" />
             <vconvs:ColorConverter x:Key="ColorConverter" />
 
